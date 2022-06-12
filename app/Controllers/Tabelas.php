@@ -24,7 +24,7 @@
                 endif;
 
                 if(!empty($dados['multa'])):
-                    $this->tabelaModel->criarTabelaMulta(10);
+                    $this->tabelaModel->criarTabelaMulta();
                 endif;
                 echo "concluido";
             elseif($dados['CDTabelas'] == 'delete'):
@@ -33,15 +33,15 @@
                 endif;
 
                 if(!empty($dados['carro'])):
-                    $this->tabelaModel->eliminarTabelaCarro(20);
+                    $this->tabelaModel->eliminarTabelaCarro();
                 endif;
 
                 if(!empty($dados['infracao'])):
-                    $this->tabelaModel->eliminarTabelaInfracao(10);
+                    $this->tabelaModel->eliminarTabelaInfracao();
                 endif;
 
                 if(!empty($dados['multa'])):
-                    $this->tabelaModel->eliminarTabelaMulta(10);
+                    $this->tabelaModel->eliminarTabelaMulta();
                 endif;
 
                 echo "concuido";

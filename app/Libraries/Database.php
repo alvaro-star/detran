@@ -94,12 +94,12 @@
             $placas = ['FBI', 'ABCD', 'FCC'];
             for ($i=1; $i <= $quantidade; $i++):
                 $placa = $i.''.($i*3).''.($i*2).$placas[$i % count($placas)];
-                $this->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, $placa)");
+                $this->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, '$placa')");
                 $this->executar();
             endfor;
         }
 
-        public function criarTabelaInfracao($quantidade){
+        public function criarTabelaInfracao(){
             $this->query("CREATE TABLE IF NOT EXISTS `tb_tipoInfracao`(`idtb_tipoInfracao` INT UNSIGNED NULL AUTO_INCREMENT, 
                                                             `descricao` VARCHAR(200) NOT NULL, 
                                                             `pontos` INT NOT NULL, 
@@ -113,14 +113,18 @@
             $this->executar();
 
             $descricoes = ['Assasinar a um bebe', 'Feiminicidio', 'Atropelamento', 'assasinato'];
-            for ($i = 1; $i<=$quantidade; $i++):
-                $nDescricoes = count($descricoes);
-                $this->query("INSERT INTO `tb_tipoInfracao` (`idtb_tipoInfracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, '".$descricoes[$i%$nDescricoes]."', ".(80*$i).', '.(50*$i).')');
+            $i = 1;
+            foreach ($descricoes as $descricao) {
+                $pontos = $i*80;
+                $valor = $i*50;
+                $this->query("INSERT INTO `tb_tipoInfracao` (`idtb_tipoInfracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, '$descricao', $pontos, $valor)");
                 $this->executar();
-            endfor;
+                $i++;
+            }
+            
         }
 
-        public function criarTabelaMulta($quantidade){
+        public function criarTabelaMulta(){
             $this->query("CREATE TABLE IF NOT EXISTS `tb_multa`(`idtb_multa` INT UNSIGNED NULL AUTO_INCREMENT, 
                                                         `ano` INT NOT NULL, 
                                                         `cidade` VARCHAR(50) NOT NULL, 
@@ -130,54 +134,27 @@
                                                         INDEX `fk_tb_multa_tb_tipoInfracao1_idx` (`tb_tipoInfracao_idtb_tipoInfracao` ASC)) 
                                                         ENGINE = InnoDB;");
             $this->executar();
+        }
 
-            $this->query("SELECT * FROM `tb_carro`");
-            $BDcarros = $this->resultados();
-            $this->query("SELECT * FROM `tb_tipoInfracao`");
-            $BDinfracoes = $this->resultados();
-            
-            $i = 0;
+        public function eliminarTabelaUsuario(){
+            $this->query("DROP TABLE `tb_usuario`");
+            $this->executar();
+        }
 
-            switch ($i) {
-                case 0:
-                    foreach ($BDcarros as $carro) {
-                        foreach ($BDinfracoes as $infracao) {
-                            $this->query("INSERT INTO `tb_multa` (`idtb_multa`, `ano`, `cidade`, `tb_carro_idtb_carro`, `tb_tipoInfracao_idtb_tipoInfracao`) VALUES (NULL, :ano, :cidade, ".$carro->getId().", ".$infracao->getId().");");
-                            $this->executar();
-                            if($i => $quantidade){
-                                break;
-                            }
-                            $i++;
-                        }
-                    }
-                    break;
-            }
+        public function eliminarTabelaCarro(){
+            $this->query("DROP TABLE `tb_carro`");
+            $this->executar();
+        }
 
-            public function eliminarTabelaUsuario(){
-                $this->query("DROP TABLE `tb_usuario`");
-                $this->executar();
-            }
-
-            public function eliminarTabelaCarro(){
-                $this->query("DROP TABLE `tb_carro`");
-                $this->executar();
-            }
-
-            public function eliminarTabelaInfracao(){
-                $this->query("DROP TABLE `tb_tipoinfracao`");
-                $this->executar();
-            }
-            public function eliminarTabelaMulta(){
-                $this->query("DROP TABLE `tb_multa`");
-                $this->executar();
-            }
-            
+        public function eliminarTabelaInfracao(){
+            $this->query("DROP TABLE `tb_tipoinfracao`");
+            $this->executar();
+        }
+        public function eliminarTabelaMulta(){
+            $this->query("DROP TABLE `tb_multa`");
+            $this->executar();
         }
     }
 
 
 ?>
-<!--    foreach($dbh->query('SELECT * from FOO') as $row) {
-        print_r($row);
-    }
-    $dbh = null;-->
