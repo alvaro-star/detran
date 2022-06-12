@@ -1,13 +1,21 @@
 <div class='container div-principal'>
-    <form class="container" action= <?=URL."/Posts/carro"?> method="POST">
 
-        <h3>Cadastro de Carro</h3>
+    <h3>Tabela de Carros</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID Carro</th>
+                <th scope="col">Placa</th>
+            </tr>
+        </thead>
 
-        <input class='caixas form-control' type="text" name="placa" placeholder='Placa' required>
-
-        <input class='btn btn-primary' type="submit" name="btn" value="Enviar">
-        
-        <!---"../../../app/Controller/controllerCarro.php"---->
-
-    </form>
+        <tbody>
+            <?php foreach ($dados as $carro):?>
+                <tr>
+                    <th scope="row"><?=$carro->idtb_carro?></th>
+                    <td><?=$carro->placa?></td>
+                </tr>
+            <?php endforeach?>
+        </tbody>
+    </table>
 </div>

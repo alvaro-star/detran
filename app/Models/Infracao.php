@@ -1,11 +1,16 @@
 <?php
-    class TipoInfracao{
+    class Infracao{
         private $id;
         private $descricao;
         private $pontos;
         private $valor;
+        private $db;
 
-        public function __construct($id, $descricao, $pontos, $valor){
+        public function __construct(){
+            $this->db = new Database();
+        }
+
+        public function prencherInfracao($id, $descricao, $pontos, $valor){
             $this->id = $id;
             $this->descricao = $descricao;
             $this->pontos = $pontos;
@@ -35,6 +40,16 @@
             echo "Pontos: ".$this->getPontos().'<br>';
             echo "Valor: ".$this->getValor().'<br>';
             echo '</div>';
+        }
+
+        public function allsInfracoes(){
+            $this->db->query("SELECT * FROM `tb_tipoInfracao`;");
+            return $this->db->resultados();
+        }
+
+        public function getInfracao($id){
+            $this->db->query("SELECT * FROM `tb_tipoInfracao` where `idtb_tipoInfracao` ".'='." $id");
+
         }
     }
 

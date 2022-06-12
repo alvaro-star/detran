@@ -5,14 +5,19 @@
         private $cidade;
         private $carro;
         private $tipoInfracao;
+        private $db;
 
 
-        public function __construct($id, $ano, $cidade, $carro, $tipoInfracao){
+        public function __construct(){
+            $this->db = new Database();
+        }
+
+        public function prencherMulta($id, $ano, $cidade, $carro, $tipoInfracao){
             $this->id = $id;
             $this->ano = $ano;
             $this->cidade = $cidade;
             $this->carro = new Carro($carro->getId(), $carro->getPlaca());
-            $this->tipoInfracao = new TipoInfracao($tipoInfracao->getId(), $tipoInfracao->getDescricao(), $tipoInfracao->getPontos(), $tipoInfracao->getValor());
+            $this->tipoInfracao = new Infracao($tipoInfracao->getId(), $tipoInfracao->getDescricao(), $tipoInfracao->getPontos(), $tipoInfracao->getValor());
         }
 
         public function getId(){
@@ -44,6 +49,11 @@
             echo '</div>';
             echo $this->getCarro()->imprimeDados();
             echo $this->getTipoInfracao()->imprimeDados();
+        }
+
+        public function allsMultas(){
+            $this->db->query("SELECT tb_multa.idtb_multa, tb_multa.ano, tb_multa.cidade, tb_carro.placa, tb_tipoinfracao.descricao FROM `tb_multa` INNER JOIN `tb_carro` ON tb_carro.idtb_carro ".'='." tb_multa.tb_carro_idtb_carro INNER JOIN `tb_tipoinfracao` ON tb_tipoinfracao.idtb_tipoInfracao ".'='." tb_multa.tb_tipoInfracao_idtb_tipoInfracao;");
+            return $this->db->resultados();
         }
     }
 

@@ -2,8 +2,6 @@
     <div id='divSecundario'>
         <?php
         
-        $db = new Database;
-
         $placa = $_POST['placa'];
 
         //Prenchendo a tabela carro para logo pegar o Id mais recente para o objeto

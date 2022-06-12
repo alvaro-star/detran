@@ -2,18 +2,16 @@
     class Posts extends Controller{
 
         public function carro(){
-            $this->view('posts/controllerCarro');
+            $this->view('posts/postCarro');
         }
 
         public function tpInfracao(){
-            $this->view('posts/controllerTipoInfracao');
+            $this->view('posts/postTipoInfracao');
         }
 
         public function multa(){
-            $this->view('posts/controllerMulta');
+            $this->view('posts/postMulta');
         }
-
-        
         
     }
 

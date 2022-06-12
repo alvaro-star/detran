@@ -2,8 +2,14 @@
     class Carro{
         private $id;
         private $placa;
+        private $db;
 
-        public function __construct($id, $placa){
+
+        public function __construct(){
+            $this->db = new Database();
+        }
+
+        public function prencherCarro($id, $placa){
             $this->id = $id;
             $this->placa = $placa;
         }
@@ -22,6 +28,16 @@
             echo "Id: ".$this->getId().'<br>';
             echo "Placa: ".$this->getPlaca().'<br>';
             echo '</div>';
+        }
+
+        public function allsCars(){
+            $this->db->query("SELECT * FROM `tb_carro`;");
+            return $this->db->resultados();
+        }
+
+        public function getCarro($id){
+            $this->db->query("SELECT * FROM `tb_carro` WHERE `idtb_carro` ".'='." $id");
+            return $this->db->resultado();
         }
 
     }

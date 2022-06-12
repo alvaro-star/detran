@@ -1,8 +1,8 @@
 <?php 
-    include ('./../app/configuracao.php');
-    include ('./../app/autoload.php');
-    include ('./../app/Libraries/Rota.php');
-    include ('./../app/Libraries/Controller.php');
+    include ('../app/configuracao.php');//constantes
+    include (APP.'\autoload.php');
+    include (APP.'\Libraries\Rota.php');
+    include (APP.'\Libraries\Controller.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,31 +11,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NAME?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?php include(PUBLICO.'\css\bootstrapCss.php'); ?>
+    
     <!--<link href="../public/css/stilo.css" rel="stylesheet">-->
  
 </head>
 <body>
     <?php
-    include("../app/Views/cabecalho.php");
-    $rotas = new Rota();
-    include("../app/Views/rodape.php");
+        $db = new Database();
+
+        include(APP.'\Views\cabecalho.php');
+        $rotas = new Rota();
+        include(APP.'\Views\rodape.php');
+
     ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <?php include(PUBLICO.'\js\bootstrapJS.php'); ?>
     <script src="<?=URL?>/public/js/main.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
-
-<!---
-    <IfModule mod_rewrite.c>
-    Options -Multiviews
-    RewriteEngine On
-    RewriteBase /webmvc/public "Antes do public vc coloca o nome do seu projeto"
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule  ^(.+)$ index.php?url=$1 [QSA,L]
-    </IfModule>
--->

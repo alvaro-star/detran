@@ -5,7 +5,7 @@
         //Para criar o banco de dados
 
         public function __construct(){
-            $this->tabelaModel = new Database;
+            $this->tabelaModel = $this->model('Tabela');
         }
 
         public function tabelas(){
