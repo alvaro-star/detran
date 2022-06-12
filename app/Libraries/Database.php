@@ -3,7 +3,7 @@
         private $host = 'localhost';
         private $user = 'root';
         private $senha = '';
-        private $base = 'dbmvc';
+        private $base = 'detran';
         private $porta = '3306';
         private $dbh;
         private $stmt;
@@ -65,6 +65,113 @@
 
         public function lastId(){
             return $this->dbh->lastInsertId();        
+        }
+
+
+        //Criacao de Tabelas
+
+        public function criarTabelaUsuario(){
+            $this->query("CREATE TABLE IF NOT EXISTS `tb_usuario` ( `idtb_usuario` INT UNSIGNED NULL AUTO_INCREMENT,
+                                                                    `nome` VARCHAR(200) NOT NULL,
+                                                                    `email` VARCHAR(70) NOT NULL,
+                                                                    `senha` VARCHAR(100) NOT NULL,
+                                                                    PRIMARY KEY (`idtb_usuario`))
+                                                                    ENGINE = InnoDB");
+            $this->executar();
+        }
+
+        public function criarTabelaCarro($quantidade){
+            $this->query("CREATE TABLE IF NOT EXISTS `tb_carro`(`idtb_carro` INT UNSIGNED NULL AUTO_INCREMENT, 
+                                                        `placa` VARCHAR(50) NOT NULL, PRIMARY KEY (`idtb_carro`), 
+                                                        UNIQUE INDEX `idtb_carro_UNIQUE` (`idtb_carro` ASC)) 
+                                                        ENGINE = InnoDB");
+            $this->executar();
+
+            //Inserindo Valores
+            $this->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, 'Escolha um...')");
+            $this->executar();
+
+            $placas = ['FBI', 'ABCD', 'FCC'];
+            for ($i=1; $i <= $quantidade; $i++):
+                $placa = $i.''.($i*3).''.($i*2).$placas[$i % count($placas)];
+                $this->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, $placa)");
+                $this->executar();
+            endfor;
+        }
+
+        public function criarTabelaInfracao($quantidade){
+            $this->query("CREATE TABLE IF NOT EXISTS `tb_tipoInfracao`(`idtb_tipoInfracao` INT UNSIGNED NULL AUTO_INCREMENT, 
+                                                            `descricao` VARCHAR(200) NOT NULL, 
+                                                            `pontos` INT NOT NULL, 
+                                                            `valor` DOUBLE NOT NULL, 
+                                                            PRIMARY KEY (`idtb_tipoInfracao`), 
+                                                            UNIQUE INDEX `idtb_tipoInfracao_UNIQUE` (`idtb_tipoInfracao` ASC)) 
+                                                            ENGINE = InnoDB");
+            $this->executar();
+            //Inserindo Valores
+            $this->query("INSERT INTO `tb_tipoInfracao` (`idtb_tipoInfracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, 'Escolha um..', '0', '0')");
+            $this->executar();
+
+            $descricoes = ['Assasinar a um bebe', 'Feiminicidio', 'Atropelamento', 'assasinato'];
+            for ($i = 1; $i<=$quantidade; $i++):
+                $nDescricoes = count($descricoes);
+                $this->query("INSERT INTO `tb_tipoInfracao` (`idtb_tipoInfracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, '".$descricoes[$i%$nDescricoes]."', ".(80*$i).', '.(50*$i).')');
+                $this->executar();
+            endfor;
+        }
+
+        public function criarTabelaMulta($quantidade){
+            $this->query("CREATE TABLE IF NOT EXISTS `tb_multa`(`idtb_multa` INT UNSIGNED NULL AUTO_INCREMENT, 
+                                                        `ano` INT NOT NULL, 
+                                                        `cidade` VARCHAR(50) NOT NULL, 
+                                                        `tb_carro_idtb_carro` INT UNSIGNED NOT NULL, 
+                                                        `tb_tipoInfracao_idtb_tipoInfracao` INT UNSIGNED NOT NULL, 
+                                                        PRIMARY KEY (`idtb_multa`), INDEX `fk_tb_multa_tb_carro_idx` (`tb_carro_idtb_carro` ASC), 
+                                                        INDEX `fk_tb_multa_tb_tipoInfracao1_idx` (`tb_tipoInfracao_idtb_tipoInfracao` ASC)) 
+                                                        ENGINE = InnoDB;");
+            $this->executar();
+
+            $this->query("SELECT * FROM `tb_carro`");
+            $BDcarros = $this->resultados();
+            $this->query("SELECT * FROM `tb_tipoInfracao`");
+            $BDinfracoes = $this->resultados();
+            
+            $i = 0;
+
+            switch ($i) {
+                case 0:
+                    foreach ($BDcarros as $carro) {
+                        foreach ($BDinfracoes as $infracao) {
+                            $this->query("INSERT INTO `tb_multa` (`idtb_multa`, `ano`, `cidade`, `tb_carro_idtb_carro`, `tb_tipoInfracao_idtb_tipoInfracao`) VALUES (NULL, :ano, :cidade, ".$carro->getId().", ".$infracao->getId().");");
+                            $this->executar();
+                            if($i => $quantidade){
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
+                    break;
+            }
+
+            public function eliminarTabelaUsuario(){
+                $this->query("DROP TABLE `tb_usuario`");
+                $this->executar();
+            }
+
+            public function eliminarTabelaCarro(){
+                $this->query("DROP TABLE `tb_carro`");
+                $this->executar();
+            }
+
+            public function eliminarTabelaInfracao(){
+                $this->query("DROP TABLE `tb_tipoinfracao`");
+                $this->executar();
+            }
+            public function eliminarTabelaMulta(){
+                $this->query("DROP TABLE `tb_multa`");
+                $this->executar();
+            }
+            
         }
     }
 

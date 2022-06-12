@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NAME?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../public/css/stilo.css" rel="stylesheet">
+    <!--<link href="../public/css/stilo.css" rel="stylesheet">-->
  
 </head>
 <body>

@@ -12,6 +12,8 @@
         public function multa(){
             $this->view('posts/controllerMulta');
         }
+
+        
         
     }
 
