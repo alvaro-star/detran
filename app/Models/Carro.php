@@ -29,6 +29,7 @@
             echo "Placa: ".$this->getPlaca().'<br>';
             echo '</div>';
         }
+        //Funcoes de processamento
 
         public function allsCars(){
             $this->db->query("SELECT * FROM `tb_carro`;");
@@ -40,7 +41,8 @@
             return $this->db->resultado();
         }
 
-        public function insertCarro($placa){
+        public function insertCarro($formulario){
+            $placa = $formulario['placa'];
             $this->db->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, :placa)");
             $this->db->bind(':placa', $placa);
             $this->db->executar();

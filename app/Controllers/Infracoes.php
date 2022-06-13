@@ -15,11 +15,10 @@
         }
 
         public function insertInfracao(){
-
             $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $this->infracaoModel->insertInfracao($formulario['placa']);
-            $dados = $this->infracaoModel->allsInfracoes();
-            $this->view('paginas/viewInfracao', $dados);
+            $this->infracaoModel->insertInfracao($formulario);
+            $this->tbInfracao();
         }
+
     }
 ?>

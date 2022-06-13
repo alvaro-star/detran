@@ -51,8 +51,15 @@
             $this->db->query("SELECT * FROM `tb_tipoInfracao` where `idtb_tipoInfracao` ".'='." $id");
         }
 
-        public function insertInfracao(){
-            
+        public function insertInfracao($formulario){
+            $descricao = $formulario['descricao'];
+            $pontos = $formulario['pontos'];
+            $pontos = $formulario['valor'];
+            $this->db->query("INSERT INTO `tb_tipoInfracao` (`idtb_tipoInfracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, :descricao, :placa, :valor)");
+            $this->db->bind(":descricao", $descricao);
+            $this->db->bind(":pontos", $pontos);
+            $this->db->bind(":valor", $valor);
+            $this->db->executar();
         }
 
 

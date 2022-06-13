@@ -15,11 +15,9 @@
         }
 
         public function insertCarro(){
-
             $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $this->carroModel->insertCarro($formulario['placa']);
-            $dados = $this->carroModel->allsCars();
-            $this->view('paginas/viewCarro', $dados);
+            $this->carroModel->insertCarro($formulario);
+            $this->tbcarro();
         }
     }
 ?>
