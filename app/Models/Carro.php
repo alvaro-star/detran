@@ -40,6 +40,12 @@
             return $this->db->resultado();
         }
 
+        public function insertCarro($placa){
+            $this->db->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, :placa)");
+            $this->db->bind(':placa', $placa);
+            $this->db->executar();
+        }
+
     }
 
 ?>

@@ -24,4 +24,5 @@
             <?php endforeach?>
         </tbody>
     </table>
+    <a class="btn btn-primary" href="<?=URL?>/multas/formMulta">Primary</a>
 </div>

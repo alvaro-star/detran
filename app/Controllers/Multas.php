@@ -10,5 +10,9 @@
             $this->view('paginas/viewMulta', $dados);
         }
 
+        public function formMulta(){
+            $this->view('forms/formMulta');
+        }
+
     }
 ?>

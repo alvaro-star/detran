@@ -49,8 +49,13 @@
 
         public function getInfracao($id){
             $this->db->query("SELECT * FROM `tb_tipoInfracao` where `idtb_tipoInfracao` ".'='." $id");
-
         }
+
+        public function insertInfracao(){
+            
+        }
+
+
     }
 
 ?>

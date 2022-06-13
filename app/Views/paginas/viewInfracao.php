@@ -22,4 +22,6 @@
             <?php endforeach?>
         </tbody>
     </table>
+
+    <a class="btn btn-primary" href="<?=URL?>/infracoes/formInfracao">Primary</a>
 </div>

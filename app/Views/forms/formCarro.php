@@ -1,5 +1,5 @@
 <div class='container div-principal'>
-    <form class="container" action= <?=URL."/Posts/carro"?> method="POST">
+    <form class="container" action= <?=URL."/carros/insertCarro"?> method="POST">
 
         <h3>Cadastro de Carro</h3>
 

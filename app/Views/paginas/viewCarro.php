@@ -18,4 +18,7 @@
             <?php endforeach?>
         </tbody>
     </table>
+
+
+    <a class="btn btn-primary" href="<?=URL?>/carros/formCarro">Primary</a>
 </div>

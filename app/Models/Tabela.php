@@ -14,7 +14,7 @@
         }
 
         public function criarTabelaCarro($quantidade){
-            $this->query("CREATE TABLE IF NOT EXISTS `TBCARRO`(`idtb_carro` INT UNSIGNED NULL AUTO_INCREMENT, 
+            $this->query("CREATE TABLE IF NOT EXISTS `tb_carro`(`idtb_carro` INT UNSIGNED NULL AUTO_INCREMENT, 
                                                         `placa` VARCHAR(50) NOT NULL, PRIMARY KEY (`idtb_carro`), 
                                                         UNIQUE INDEX `idtb_carro_UNIQUE` (`idtb_carro` ASC)) 
                                                         ENGINE = InnoDB");
