@@ -5,8 +5,8 @@
             $this->infracaoModel = $this->model('Infracao');
         }
 
-        public function tbinfracao(){
-            $dados = $this->infracaoModel->allsInfracoes();
+        public function tbInfracao(){
+            $dados = $this->infracaoModel->getAllsInfracoes();
             $this->view('paginas/viewInfracao', $dados);
         }
 
@@ -15,8 +15,9 @@
         }
 
         public function insertInfracao(){
+            //Formulario es um vetor
             $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $this->infracaoModel->insertInfracao($formulario);
+            $this->infracaoModel->insertInfracaoBD($formulario);
             $this->tbInfracao();
         }
 

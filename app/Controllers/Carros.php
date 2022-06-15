@@ -5,8 +5,8 @@
             $this->carroModel = $this->model('Carro');
         }
 
-        public function tbcarro(){
-            $dados = $this->carroModel->allsCars();
+        public function tbCarro(){
+            $dados = $this->carroModel->getAllsCarros();
             $this->view('paginas/viewCarro', $dados);
         }
 
@@ -15,8 +15,9 @@
         }
 
         public function insertCarro(){
+            //Formulario é um vetor
             $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $this->carroModel->insertCarro($formulario);
+            $this->carroModel->insertCarroBD($formulario);
             $this->tbcarro();
         }
     }

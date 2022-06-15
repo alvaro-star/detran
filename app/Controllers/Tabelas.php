@@ -16,7 +16,7 @@
                 endif;
 
                 if(!empty($dados['carro'])):
-                    $this->tabelaModel->criarTabelaCarro(20);
+                    $this->tabelaModel->criarTabelaCarro(10);
                 endif;
 
                 if(!empty($dados['infracao'])):
