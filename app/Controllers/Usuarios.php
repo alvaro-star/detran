@@ -72,9 +72,10 @@
                     $dados['senha'] = md5($formulario['senha']);
                     if($this->usuarioModel->insert($dados)){
                         $dados['senha'] = $formulario['senha'];
-                        echo 'Deu certo';
+                        Sessao::mensagem('usuario', 'Cadastro realizado com sucesso');
+                        Url::redirecionar('usuarios/login');
                     }else{
-                        echo "Nao deu certo";
+                        die("Erro ao armazenar ao usuario no Banco de Dados");
                     }
                 endif;
                 
@@ -133,8 +134,13 @@
                 endif;
 
                 if(!in_array(!'', $dados['erro'])):
-                    $checarLogin = $this->usuarioModel->checarLogin($formulario['email'], $formulario['senha']);
-                    echo ($checarLogin) ? "Conseguiu" : 'Nao conseguiu';
+                    $usuario = $this->usuarioModel->checarLogin($formulario['email'], $formulario['senha']);
+                    if ($usuario) {
+                        $this->criarSessaoUsuario($usuario);
+                    } else {
+                        Sessao::mensagem('usuario', 'Usuaro ou senha Inválidos', 'alert alert-danger');
+                    }
+                    
                 endif;
                 
             else:
@@ -149,5 +155,23 @@
             endif;
 
             $this->view('/usuarios/login', $dados);
+        }
+
+        private function criarSessaoUsuario($usuario){
+
+            
+            $_SESSION['usuario_id'] = $usuario->idtb_usuario;
+            $_SESSION['usuario_nome'] = $usuario->nome;
+            $_SESSION['usuario_email'] = $usuario->email;
+            Url::redirecionar('paginas/home');
+        }
+
+        public function sair(){
+            unset($_SESSION['usuario_id']);
+            unset($_SESSION['usuario_nome']);
+            unset($_SESSION['usuario_email']);
+
+            session_destroy();
+            Url::redirecionar('usuarios/login');
         }
     }

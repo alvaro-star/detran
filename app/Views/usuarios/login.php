@@ -1,6 +1,8 @@
 <div class="container div-principal">
+
+    <?=Sessao::mensagem('usuario')?>
     <form class="form" method="POST" action="<?=URL?>/usuarios/login">
-        <h1 class="h3 mb-3 fw-normal">Faça Loginss</h1>
+        <h1 class="h3 mb-3 fw-normal">Informe os seus dados</h1>
         <div class="form-floating">
                 <input type="text" value = "<?=$dados['email']?>" name = "email" class="form-control <?=$dados['erro']['email']?'is-invalid':''?>" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Endereço de email</label>

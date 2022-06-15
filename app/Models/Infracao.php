@@ -54,7 +54,7 @@
         public function insertInfracao($formulario){
             $descricao = $formulario['descricao'];
             $pontos = $formulario['pontos'];
-            $pontos = $formulario['valor'];
+            $valor = $formulario['valor'];
             $this->db->query("INSERT INTO `tb_tipoInfracao` (`idtb_tipoInfracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, :descricao, :placa, :valor)");
             $this->db->bind(":descricao", $descricao);
             $this->db->bind(":pontos", $pontos);

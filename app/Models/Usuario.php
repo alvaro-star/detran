@@ -23,12 +23,13 @@
         }
 
         public function checarLogin($email, $senha){
-            $this->db->query("SELECT email, senha FROM tb_usuario WHERE email = :em;");
+            $this->db->query("SELECT * FROM tb_usuario WHERE email = :em;");
             $this->db->bind(":em", $email);
+            $usuario = $this->db->resultado();
 
-            if($this->db->resultado()){
-                $resultado = $this->db->resultado()->senha;
-                return (md5($senha) == $resultado) ? true : false;
+            if($usuario){
+                $resultado = $usuario->senha;
+                return (md5($senha) == $resultado) ? $usuario : false;
             }else{
                 return false;
             }

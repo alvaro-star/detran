@@ -1,8 +1,7 @@
 <?php 
+    session_start();
     include ('../app/configuracao.php');//constantes
     include (APP.'\autoload.php');
-    include (APP.'\Libraries\Rota.php');
-    include (APP.'\Libraries\Controller.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
