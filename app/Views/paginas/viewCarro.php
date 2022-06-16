@@ -20,5 +20,5 @@
     </table>
 
 
-    <a class="btn btn-primary" href="<?=URL?>/carros/formCarro">Primary</a>
+    <a class="btn btn-primary" href="<?=URL?>/carros/insertCarro">Primary</a>
 </div>
