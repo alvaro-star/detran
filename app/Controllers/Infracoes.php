@@ -1,12 +1,14 @@
 <?php
     class Infracoes extends Controller{
 
+        private $infracaoServer;
+
         public function __construct(){
-            $this->infracaoModel = $this->model('Infracao');
+            $this->infracaoServer = $this->server('Infracao');
         }
 
         public function tbInfracao(){
-            $dados = $this->infracaoModel->getAllsInfracoes();
+            $dados = $this->infracaoServer->getAllInfracoes();
             $this->view('paginas/viewInfracao', $dados);
         }
 
@@ -17,7 +19,7 @@
         public function insertInfracao(){
             //Formulario es um vetor
             $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $this->infracaoModel->insertInfracaoBD($formulario);
+            $this->infracaoServer->insertInfracaoBD($formulario);
             $this->tbInfracao();
         }
 

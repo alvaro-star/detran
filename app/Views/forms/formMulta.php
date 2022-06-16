@@ -9,7 +9,7 @@
             <?php
 
             echo "<label>Carro da Multa</label>";
-            echo "<select name = 'id_tbcarro' class = 'selectMulta form-select' aria-label='Default select example' required>";
+            echo "<select name = 'idtb_carro' class = 'selectMulta form-select' aria-label='Default select example' required>";
             foreach ($dados['carros'] as $carro) {
                 $id_carro = $carro->idtb_carro;
                 $placa = $carro->placa;
@@ -19,9 +19,9 @@
 
 
             echo "<label>Infração da Multa</label>";
-            echo "<select name = 'idtb_tipoInfracao' class = 'selectMulta form-select' aria-label='Default select example' required>";
+            echo "<select name = 'idtb_infracao' class = 'selectMulta form-select' aria-label='Default select example' required>";
             foreach ($dados['infracoes'] as $infracao) {
-                $id_infracao = $infracao->idtb_tipoInfracao;
+                $id_infracao = $infracao->idtb_infracao;
                 $descricao = $infracao->descricao;
                 echo "<option value = '$id_infracao'>$descricao</option>";
             }

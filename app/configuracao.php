@@ -9,4 +9,5 @@
     const TBCARRO = 'tb_carro';
     const TBINFRACAO = 'tb_tipoInfracao';
     const TBMULTA = 'tb_multa';
+    const TBUSUARIO = 'tb_usuario';
 ?>

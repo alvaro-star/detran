@@ -1,5 +1,5 @@
 <?php
-    class serverCarro{
+    class Carro{
         private $db;
 
         public function __construct(){
@@ -18,9 +18,11 @@
 
         public function insertCarroBD($formulario){
             $placa = $formulario['placa'];
-            $this->db->query("INSERT INTO tb_carro (`placa`) VALUES (:placa)");
+            $this->db->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, :placa)");
             $this->db->bind(':placa', $placa);
             $this->db->executar();
         }
+
     }
+
 ?>

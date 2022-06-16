@@ -14,7 +14,7 @@
         <tbody>
             <?php foreach ($dados as $infracao):?>
                 <tr>
-                    <th scope="row"><?=$infracao->idtb_tipoInfracao?></th>
+                    <th scope="row"><?=$infracao->idtb_infracao?></th>
                     <td><?=$infracao->descricao?></td>
                     <td><?=$infracao->pontos?></td>
                     <td><?=$infracao->valor?></td>

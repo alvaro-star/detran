@@ -25,18 +25,18 @@
             $placas = ['FBI', 'ABCD', 'FCC'];
             for ($i=1; $i <= $quantidade; $i++):
                 $placa = $i.''.($i*3).''.($i*2).$placas[$i % count($placas)];
-                $this->query("INSERT INTO tb_carro (`placa`) VALUES ('$placa')");
+                $this->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, '$placa')");
                 $this->executar();
             endfor;
         }
 
         public function criarTabelaInfracao(){
-            $this->query("CREATE TABLE IF NOT EXISTS `tb_infracao`(`idtb_infracao` INT UNSIGNED NULL AUTO_INCREMENT, 
+            $this->query("CREATE TABLE IF NOT EXISTS `tb_tipoInfracao`(`idtb_tipoInfracao` INT UNSIGNED NULL AUTO_INCREMENT, 
                                                             `descricao` VARCHAR(200) NOT NULL, 
                                                             `pontos` INT NOT NULL, 
                                                             `valor` DOUBLE NOT NULL, 
-                                                            PRIMARY KEY (`idtb_infracao`), 
-                                                            UNIQUE INDEX `idtb_infracao_UNIQUE` (`idtb_infracao` ASC)) 
+                                                            PRIMARY KEY (`idtb_tipoInfracao`), 
+                                                            UNIQUE INDEX `idtb_tipoInfracao_UNIQUE` (`idtb_tipoInfracao` ASC)) 
                                                             ENGINE = InnoDB");
             $this->executar();
             //Inserindo Valores
@@ -46,11 +46,11 @@
             foreach ($descricoes as $descricao) {
                 $pontos = $i*80;
                 $valor = $i*50;
-                $this->query("INSERT INTO `tb_infracao` (`idtb_infracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, '$descricao', $pontos, $valor)");
+                $this->query("INSERT INTO `tb_tipoInfracao` (`idtb_tipoInfracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, '$descricao', $pontos, $valor)");
                 $this->executar();
                 $i++;
             }
-
+            
         }
 
         public function criarTabelaMulta(){
@@ -58,9 +58,9 @@
                                                         `ano` INT NOT NULL, 
                                                         `cidade` VARCHAR(50) NOT NULL, 
                                                         `tb_carro_idtb_carro` INT UNSIGNED NOT NULL, 
-                                                        `tb_infracao_idtb_infracao` INT UNSIGNED NOT NULL, 
+                                                        `tb_tipoInfracao_idtb_tipoInfracao` INT UNSIGNED NOT NULL, 
                                                         PRIMARY KEY (`idtb_multa`), INDEX `fk_tb_multa_tb_carro_idx` (`tb_carro_idtb_carro` ASC), 
-                                                        INDEX `fk_tb_multa_tb_infracao1_idx` (`tb_infracao_idtb_infracao` ASC)) 
+                                                        INDEX `fk_tb_multa_tb_tipoInfracao1_idx` (`tb_tipoInfracao_idtb_tipoInfracao` ASC)) 
                                                         ENGINE = InnoDB;");
             $this->executar();
         }
@@ -76,7 +76,7 @@
         }
 
         public function eliminarTabelaInfracao(){
-            $this->query("DROP TABLE `tb_infracao`");
+            $this->query("DROP TABLE `tb_tipoinfracao`");
             $this->executar();
         }
         public function eliminarTabelaMulta(){
@@ -84,5 +84,4 @@
             $this->executar();
         }
     }
-?> 
-
+?>

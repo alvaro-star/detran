@@ -1,27 +1,30 @@
 <?php
     class Carro{
-        private $db;
 
-        public function __construct(){
-            $this->db = new Database();
+        private $id;
+        private $placa;
+
+        public function __construct($id, $placa){
+            $this->id = $id;
+            $this->placa = $placa;
         }
 
-        public function getAllsCarros(){
-            $this->db->query("SELECT * FROM `tb_carro`;");
-            return $this->db->resultados();
+        public function getId(){
+            return $this->id;
         }
 
-        public function getCarro($id){
-            $this->db->query("SELECT * FROM `tb_carro` WHERE `idtb_carro` ".'='." $id");
-            return $this->db->resultado();
+        public function getPlaca(){
+            return $this->placa;
         }
 
-        public function insertCarroBD($formulario){
-            $placa = $formulario['placa'];
-            $this->db->query("INSERT INTO tb_carro (`idtb_carro`, `placa`) VALUES (NULL, :placa)");
-            $this->db->bind(':placa', $placa);
-            $this->db->executar();
+        public function setId($id){
+            $this->id = $id;
         }
+
+        public function setPlaca($placa){
+            $this->placa = $placa;
+        }
+
 
     }
 

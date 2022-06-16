@@ -1,34 +1,35 @@
 <?php
-    class Infracao{
+    class TipoInfracao{
 
-        private $db;
+        private $id;
+        private $descricao;
+        private $pontos;
+        private $valor;
 
-        public function __construct(){
-            $this->db = new Database();
+        public function __construct($id, $descricao, $pontos, $valor){
+            $this->id = $id;
+            $this->descricao = $descricao;
+            $this->pontos = $pontos;
+            $this->valor = $valor;
         }
 
-        public function getAllsInfracoes(){
-            $this->db->query("SELECT * FROM `tb_tipoInfracao`;");
-            return $this->db->resultados();
+        public function getId(){
+            return $this->id;
         }
 
-        public function getInfracao($id){
-            $this->db->query("SELECT * FROM `tb_tipoInfracao` where `idtb_tipoInfracao` ".'='." $id");
-            return $this->db->resultado();
+        public function getDescricao(){
+            return $this->descricao;
         }
 
-        public function insertInfracaoBD($formulario){
-            $descricao = $formulario['descricao'];
-            $pontos = $formulario['pontos'];
-            $valor = $formulario['valor'];
-            $this->db->query("INSERT INTO `tb_tipoInfracao` (`idtb_tipoInfracao`, `descricao`, `pontos`, `valor`) VALUES (NULL, :descricao, :placa, :valor)");
-            $this->db->bind(":descricao", $descricao);
-            $this->db->bind(":pontos", $pontos);
-            $this->db->bind(":valor", $valor);
-            $this->db->executar();
+        public function getPontos(){
+            return $this->pontos;
+        }
+
+        public function getValor(){
+            return $this->valor;
         }
 
 
     }
-    //ss
+    
 ?>     
