@@ -1,12 +1,22 @@
 <?php
     class Carro{
 
+        private $db;
         private $id;
         private $placa;
 
-        public function __construct($id, $placa){
-            $this->id = $id;
+        public function __construct(){
+            $this->db = new Database();
+        }
+        public function newCarro($placa, $id = null){
             $this->placa = $placa;
+            $this->id = $id;
+        }
+
+        public function insertBD(){
+            $this->db->query("INSERT INTO tb_carro (`placa`) VALUES (:placa)");
+            $this->db->bind(':placa', $this->placa);
+            $this->db->executar();
         }
 
         public function getId(){
@@ -15,10 +25,6 @@
 
         public function getPlaca(){
             return $this->placa;
-        }
-
-        public function setId($id){
-            $this->id = $id;
         }
 
         public function setPlaca($placa){

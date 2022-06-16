@@ -1,11 +1,28 @@
 <?php
-    class serverMulta{
+    class serverMulta extends Controller{
         private $db;
+        private $multaModel;
+        private $carroServer;
+        private $infracaoServer;
         
         public function __construct(){
             $this->db = new Database();
+            $this->multaModel = $this->model('Multa');
+            $this->carroServer = $this->server('Carro');
+            $this->infracaoServer = $this->server('Infracao');
         }
 
+        public function insertMultaBD($formulario){
+
+            $ano = $formulario['ano'];
+            $cidade = $formulario['cidade'];
+            $carro = $this->carroServer->getCarro($formulario['idtb_carro']);
+            $infracao = $this->infracaoServer->getInfracao($formulario['idtb_infracao']);
+            
+            $this->multaModel->newMulta($ano, $cidade, $carro, $infracao);
+            $this->multaModel->insertBD();
+            
+        }
         public function getMulta($id){
             $this->db->query("SELECT * FROM `tb_multa` where `idtb_multa` ".'='." $id");
             return $this->db->resultado();
@@ -16,17 +33,7 @@
             return $this->db->resultados();
         }
 
-        public function insertMultaBD($formulario){
-            $ano = $formulario['ano'];
-            $cidade = $formulario['cidade'];
-            $idCarro = $formulario['idtb_carro'];
-            $idInfracao = $formulario['idtb_infracao'];
-            $this->db->query("INSERT INTO `tb_multa`(`ano`, `cidade`, `tb_carro_idtb_carro`, `tb_infracao_idtb_infracao`) VALUES (:ano, :cidade, :idtb_carro, :idtb_infracao)");
-            $this->db->bind(":ano", $ano);
-            $this->db->bind(":cidade", $cidade);
-            $this->db->bind(":idtb_carro", $idCarro);
-            $this->db->bind(":idtb_infracao", $idInfracao);
-            $this->db->executar();
-        }
+
+
     } 
 ?>
