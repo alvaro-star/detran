@@ -23,5 +23,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="<?=URL?>/infracoes/formInfracao">Primary</a>
+    <a class="btn btn-primary" href="<?=URL?>/infracoes/insertInfracao">Primary</a>
 </div>

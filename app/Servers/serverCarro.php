@@ -14,7 +14,6 @@ class serverCarro extends Controller
     {
         if (isset($formulario)) :
             $dados = [
-
                 'dado' => [
                     'placa' => trim($formulario['placa'])
                 ],

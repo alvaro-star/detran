@@ -16,15 +16,13 @@ class Carros extends Controller
 
     public function insertCarro()
     {
-        //Formulario é um vetor
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $dados = $this->carroServer->validarCampos($formulario);
 
         if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
             $this->carroServer->insertCarroBD($formulario);
             Url::redirecionar('carros/tbCarro');
-        else:
-            $this->view('forms/formCarro', $dados);
         endif;
+        $this->view('forms/formCarro', $dados);
     }
 }

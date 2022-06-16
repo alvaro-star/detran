@@ -16,7 +16,7 @@
         }
 
         public static function NumberFloat($number){
-            $re = '/^[0-9]+?(|.[0-9]+)$/m';
+            $re = '/^\d{0,6}+(\.\d{1,2})?$/';
             return (!preg_match($re, $number)) ? true : false;
         }
 
