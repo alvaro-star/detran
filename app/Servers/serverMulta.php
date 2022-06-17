@@ -90,7 +90,6 @@ class serverMulta extends Controller
 
     public function insertMultaBD($formulario)
     {
-
         $ano = $formulario['ano'];
         $cidade = $formulario['cidade'];
         $carro = $this->carroServer->getCarro($formulario['idtb_carro']);
@@ -99,6 +98,18 @@ class serverMulta extends Controller
         $this->multaModel->newMulta($ano, $cidade, $carro, $infracao);
         $this->multaModel->insertBD();
     }
+
+    public function removeMulta($id)
+    {
+        $multa = $this->getMulta($id);
+
+        $carro = $this->carroServer->getCarro($multa->tb_carro_idtb_carro);
+        $infracao = $this->infracaoServer->getInfracao($multa->tb_infracao_idtb_infracao);
+        $this->multaModel->newMulta($multa->ano, $multa->cidade, $carro, $infracao, $multa->idtb_multa);
+        
+        $this->multaModel->removeBD();
+    }
+
     public function getMulta($id)
     {
         $this->db->query("SELECT * FROM `tb_multa` where `idtb_multa` " . '=' . " $id");

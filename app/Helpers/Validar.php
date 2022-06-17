@@ -36,4 +36,3 @@
             return (!preg_match($re, $text)) ? true : false;
         }
     }
-?>

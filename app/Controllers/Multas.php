@@ -35,4 +35,11 @@ class Multas extends Controller
 
         $this->view('forms/formMulta', $dados);
     }
+
+    public function removeMulta($id)
+    {
+        $this->multaServer->removeMulta($id);
+        Sessao::mensagem('delete', 'A multa foi removido com sucesso');
+        Url::redirecionar('multas/tbMulta');
+    }
 }

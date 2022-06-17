@@ -52,7 +52,8 @@ class serverCarro extends Controller
         $this->carroModel->insertBD();
     }
 
-    public function removeCarro($id){
+    public function removeCarro($id)
+    {
         $carro = $this->getCarro($id);
         $this->carroModel->newCarro($carro->placa, $carro->idtb_carro);
         $this->carroModel->removeBD();
@@ -64,8 +65,9 @@ class serverCarro extends Controller
         return $this->db->resultados();
     }
 
-    public function getAllMultas($id){
-        $this->db->query("SELECT * FROM `tb_multa` where `tb_carro_idtb_carro` ".'='." :id");
+    public function getAllMultas($id)
+    {
+        $this->db->query("SELECT * FROM `tb_multa` where `tb_carro_idtb_carro` " . '=' . " :id");
         $this->db->bind(':id', $id);
         return $this->db->resultados();
     }
