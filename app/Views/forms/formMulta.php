@@ -1,5 +1,5 @@
-    <div class='container div-principal'>
-        <form class="container" action=<?= URL . "/multas/insertMulta" ?> method="POST">
+    <div class='container div-principal '>
+        <form class="container " action=<?= URL . "/multas/insertMulta" ?> method="POST">
 
             <h3>Multa</h3>
             <div class="form-floating">
@@ -20,14 +20,14 @@
 
             <!-- Funcao do php-->
 
-            <select name='idtb_carro' class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <select name='idtb_carro' class="form-select form-select-lg mb-3 <?= $dados['erro']['idtb_carro'] ? 'is-invalid' : '' ?>" aria-label=".form-select-lg example">
                 <option value=''> Escolha um carro...</option>
                 <?php foreach ($dados['carros'] as $carro) : ?>
                     <option <?=($carro->idtb_carro == $dados['dado']['idtb_carro']) ? 'selected': ''?> value='<?= $carro->idtb_carro ?>'> <?= $carro->placa; ?> </option>
                 <?php endforeach ?>
             </select>
 
-            <select name='idtb_infracao' class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <select name='idtb_infracao' class="form-select form-select-lg mb-3 <?= $dados['erro']['idtb_infracao'] ? 'is-invalid' : '' ?>" aria-label=".form-select-lg example">
                 <option value=''> Escolha uma infracao...</option>
                 <?php foreach ($dados['infracoes'] as $infracao) : ?>
                     <option <?=($infracao->idtb_infracao == $dados['dado']['idtb_infracao']) ? 'selected': ''?> value='<?= $infracao->idtb_infracao ?>'> <?= $infracao->descricao ?></option>
