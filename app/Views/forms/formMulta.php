@@ -2,31 +2,38 @@
         <form class="container" action=<?= URL . "/multas/insertMulta" ?> method="POST">
 
             <h3>Multa</h3>
-            <input class='caixas form-control' type="number" name="ano" placeholder='Ano' required>
-            <input class='caixas form-control' type="text" name="cidade" placeholder='Cidade' required>
+            <div class="form-floating">
+                <input value="<?= $dados['dado']['ano'] ?>" name="ano" class="form-control <?= $dados['erro']['ano'] ? 'is-invalid' : '' ?>" placeholder="Ano">
+                <label for="floatingPassword">Ano</label>
+                <div class="invalid-feedback">
+                    <?= $dados['erro']['ano'] ?>
+                </div>
+            </div>
+            <div class="form-floating">
+                <input value="<?= $dados['dado']['cidade'] ?>" name="cidade" class="form-control <?= $dados['erro']['cidade'] ? 'is-invalid' : '' ?>" placeholder="Cidade">
+                <label for="floatingPassword">Cidade</label>
+                <div class="invalid-feedback">
+                    <?= $dados['erro']['cidade'] ?>
+                </div>
+            </div>
 
             <!-- Funcao do php-->
-            <?php
+            
+            <label>Carro da Multa</label>
+            <select name = 'idtb_carro' class = 'selectMulta form-select' aria-label='Default select example'>
+                <option value='' > Escolha um carro...</option>
+                <?php foreach ($dados['carros'] as $carro) : ?>
+                    <option value='<?=$carro->idtb_carro?>' > <?=$carro->placa;?>  </option>
+                <?php endforeach ?>
+            </select>
 
-            echo "<label>Carro da Multa</label>";
-            echo "<select name = 'idtb_carro' class = 'selectMulta form-select' aria-label='Default select example' required>";
-            foreach ($dados['carros'] as $carro) {
-                $id_carro = $carro->idtb_carro;
-                $placa = $carro->placa;
-                echo "<option value='$id_carro'>$placa</option>";
-            }
-            echo "</select>";
-
-
-            echo "<label>Infração da Multa</label>";
-            echo "<select name = 'idtb_infracao' class = 'selectMulta form-select' aria-label='Default select example' required>";
-            foreach ($dados['infracoes'] as $infracao) {
-                $id_infracao = $infracao->idtb_infracao;
-                $descricao = $infracao->descricao;
-                echo "<option value = '$id_infracao'>$descricao</option>";
-            }
-            echo '</select>';
-            ?>
+            <label>Infração da Multa</label>
+            <select name = 'idtb_infracao' class = 'selectMulta form-select' aria-label='Default select example'>
+            <option value=''> Escolha uma infracao...</option>
+                <?php foreach ($dados['infracoes'] as $infracao) : ?>
+                    <option value = '<?=$infracao->idtb_infracao?>' > <?=$infracao->descricao?></option>
+                <?php endforeach ?>
+            </select>
 
             <input class='btn btn-primary' type="submit" name="btn" value="Enviar">
 

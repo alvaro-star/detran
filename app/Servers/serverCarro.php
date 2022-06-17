@@ -60,7 +60,15 @@ class serverCarro extends Controller
 
     public function getCarro($id)
     {
-        $this->db->query("SELECT * FROM `tb_carro` WHERE `idtb_carro` " . '=' . " $id");
+        $this->db->query('SELECT * FROM `tb_carro` WHERE `idtb_carro` ' . '=' . ' :id');
+        $this->db->bind(':id', $id);
         return $this->db->resultado();
+    }
+
+    public function checarCarro($id)
+    {
+        $this->db->query("SELECT * FROM `tb_carro` WHERE `idtb_carro` " . '=' . " :id");
+        $this->db->bind(':id', $id);
+        return ($this->db->resultado()) ? true : false;
     }
 }

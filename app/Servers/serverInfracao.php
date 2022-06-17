@@ -26,7 +26,7 @@ class serverInfracao extends Controller
                 ]
             ];
             //Validar a descricao
-            if (Validar::text($formulario['descricao'])) :
+            if (Validar::text($formulario['descricao'], 200)) :
                 $dados['erro']['descricao'] = 'A descricao nao pode conter caracteres especiais';
             endif;
             //Validar Pontos
@@ -89,7 +89,14 @@ class serverInfracao extends Controller
 
     public function getInfracao($id)
     {
-        $this->db->query("SELECT * FROM `tb_infracao` where `idtb_infracao` " . '=' . " $id");
+        $this->db->query("SELECT * FROM `tb_infracao` where `idtb_infracao` " . '=' . " :id");
+        $this->db->bind(':id', $id);
         return $this->db->resultado();
+    }
+
+    public function checarInfracao($id){
+        $this->db->query("SELECT * FROM `tb_infracao` WHERE `idtb_infracao` " . '=' . " :id");
+        $this->db->bind(':id', $id);
+        return ($this->db->resultado()) ? true : false;
     }
 }

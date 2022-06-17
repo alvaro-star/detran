@@ -31,8 +31,8 @@
             return (!preg_match($re, $placa)) ? true : false;
         }
 
-        public static function Text($text){
-            $re = '/^[aA-zZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÒÖÚÇÑ ]{0,200}+$/m';
+        public static function Text($text, $tamanho){
+            $re = '/^[aA-zZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÒÖÚÇÑ ]{0,'.$tamanho.'}+$/m';
             return (!preg_match($re, $text)) ? true : false;
         }
     }
