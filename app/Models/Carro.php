@@ -19,6 +19,12 @@
             $this->db->executar();
         }
 
+        public function removeBD(){
+            $this->db->query("DELETE FROM `tb_carro` WHERE `tb_carro`.`idtb_carro` ".'='." :id");
+            $this->db->bind(':id', $this->id);
+            $this->db->executar();
+        }
+
         public function getId(){
             return $this->id;
         }
