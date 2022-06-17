@@ -39,4 +39,25 @@ class Carros extends Controller
 
         Url::redirecionar('carros/tbCarro');
     }
+
+    public function editCarro($id){
+        $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $carro = $this->carroServer->getCarro($id);
+        $carro = To::array($carro);
+
+        if(is_null($formulario)){
+            $dados = $this->carroServer->validarCampos($carro);
+        }else{
+            $dados = $this->carroServer->validarCampos($formulario);
+            
+            if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
+                $this->carroServer->validarIgualdade($formulario, $carro);
+                $this->carroServer->editCarroBD($formulario, $carro['idtb_carro']);
+                Url::redirecionar('carros/tbCarro');
+            endif;
+        }
+
+        $dados['dado']['idtb_carro'] = $carro['idtb_carro'];
+        $this->view('forms/formCarro', $dados);
+    }
 }

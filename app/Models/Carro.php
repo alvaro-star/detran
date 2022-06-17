@@ -19,6 +19,13 @@
             $this->db->executar();
         }
 
+        public function updateBD(){
+            $this->db->query("UPDATE `tb_carro` SET `placa` = :placa WHERE `tb_carro`.`idtb_carro` ".'='." :id");
+            $this->db->bind(':placa', $this->placa);
+            $this->db->bind(':id', $this->id);
+            $this->db->executar();
+        }
+
         public function removeBD(){
             $this->db->query("DELETE FROM `tb_carro` WHERE `tb_carro`.`idtb_carro` ".'='." :id");
             $this->db->bind(':id', $this->id);

@@ -35,4 +35,15 @@
             $re = '/^[aA-zZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÒÖÚÇÑ ]{0,'.$tamanho.'}+$/m';
             return (!preg_match($re, $text)) ? true : false;
         }
+
+        
+
+        public static function areDiferents($array1, $array2){
+            foreach ($array1 as $campo => $value) {
+                if($array2[$campo] != $value){
+                    return true;
+                }
+            }
+            return false;
+        }
     }

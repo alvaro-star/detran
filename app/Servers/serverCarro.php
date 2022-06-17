@@ -45,11 +45,24 @@ class serverCarro extends Controller
         return $dados;
     }
 
+    public function validarIgualdade($formulario, $carro){
+        if(Validar::areDiferents($formulario, $carro)){
+            Sessao::mensagem('edit', 'Alteracoes salvas');
+        }else{
+            Sessao::mensagem('edit', 'Nenhuma Alteracao foi realizada', 'alert alert-secondary');
+        }
+    }
+
     public function insertCarroBD($formulario)
     {
         $placa = $formulario['placa'];
         $this->carroModel->newCarro($placa);
         $this->carroModel->insertBD();
+    }
+
+    public function editCarroBD($carro, $id){
+        $this->carroModel->newCarro($carro['placa'], $id);
+        $this->carroModel->updateBD();
     }
 
     public function removeCarro($id)
