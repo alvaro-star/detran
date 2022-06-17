@@ -65,7 +65,8 @@ class serverCarro extends Controller
     }
 
     public function getAllMultas($id){
-        $this->db->query("SELECT * FROM `tb_multa` where `tb_carro_idtb_carro` ".'='." $id");
+        $this->db->query("SELECT * FROM `tb_multa` where `tb_carro_idtb_carro` ".'='." :id");
+        $this->db->bind(':id', $id);
         return $this->db->resultados();
     }
 

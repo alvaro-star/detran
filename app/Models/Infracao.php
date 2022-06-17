@@ -26,6 +26,12 @@
             $this->db->executar();
         }
 
+        public function removeBD(){
+            $this->db->query("DELETE FROM `tb_infracao` WHERE `tb_infracao`.`idtb_infracao` ".'='." :id");
+            $this->db->bind(':id', $this->id);
+            $this->db->executar();
+        }
+
         public function getDescricao(){
             return $this->descricao;
         }

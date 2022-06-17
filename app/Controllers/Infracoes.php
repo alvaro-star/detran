@@ -28,4 +28,17 @@ class Infracoes extends Controller
 
         $this->view('forms/formInfracao', $dados);
     }
+
+    public function removeInfracao($id)
+    {
+        $multasInfracoes = $this->infracaoServer->getAllMultas($id);
+        if (!$multasInfracoes) :
+            $this->infracaoServer->removeInfracao($id);
+            Sessao::mensagem('delete', 'A infracao foi removido com sucesso');
+        else:
+            Sessao::mensagem('delete', 'A infracao possui uma multa, nao pode ser removido', 'alert alert-danger');
+        endif;
+
+        Url::redirecionar('infracoes/tbInfracao');
+    }
 }

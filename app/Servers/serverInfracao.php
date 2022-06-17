@@ -81,9 +81,23 @@ class serverInfracao extends Controller
         $this->infracaoModel->insertBD();
     }
 
+    public function removeInfracao($id)
+    {
+        $infracao = $this->getInfracao($id);
+        $this->infracaoModel->newInfracao($infracao->descricao, $infracao->pontos, $infracao->valor, $infracao->idtb_infracao);
+        $this->infracaoModel->removeBD();
+    }
+
     public function getAllInfracoes()
     {
         $this->db->query("SELECT * FROM `tb_infracao`");
+        return $this->db->resultados();
+    }
+
+    public function getAllMultas($id)
+    {
+        $this->db->query("SELECT * FROM `tb_multa` where `tb_infracao_idtb_infracao` " . '=' . " :id");
+        $this->db->bind(':id', $id);
         return $this->db->resultados();
     }
 
@@ -94,7 +108,8 @@ class serverInfracao extends Controller
         return $this->db->resultado();
     }
 
-    public function checarInfracao($id){
+    public function checarInfracao($id)
+    {
         $this->db->query("SELECT * FROM `tb_infracao` WHERE `idtb_infracao` " . '=' . " :id");
         $this->db->bind(':id', $id);
         return ($this->db->resultado()) ? true : false;
