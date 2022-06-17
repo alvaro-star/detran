@@ -15,11 +15,6 @@ class Infracoes extends Controller
         $this->view('paginas/viewInfracao', $dados);
     }
 
-    public function formInfracao()
-    {
-        $this->view('forms/formInfracao');
-    }
-
     public function insertInfracao()
     {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
