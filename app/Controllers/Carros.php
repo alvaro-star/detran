@@ -9,7 +9,7 @@ class Carros extends Controller
         $this->carroServer = $this->server('Carro');
     }
 
-    public function tbCarro()
+    public function index()
     {
         $dados = $this->carroServer->getAllCarros();
         $this->view('paginas/viewCarro', $dados);
@@ -22,9 +22,9 @@ class Carros extends Controller
 
         if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
             $this->carroServer->insertCarroBD($formulario);
-            Url::redirecionar('carros/tbCarro');
+            Url::redirecionar('carros/tbCarro/');
         endif;
-        $this->view('forms/formCarro', $dados);
+        $this->view('forms/formCarro/', $dados);
     }
 
     public function removeCarro($id)
@@ -37,7 +37,7 @@ class Carros extends Controller
             Sessao::mensagem('delete', 'O carro possui uma multa, nao pode ser removido', 'alert alert-danger');
         endif;
 
-        Url::redirecionar('carros/tbCarro');
+        Url::redirecionar('carros/index');
     }
 
     public function editCarro($id){
@@ -53,7 +53,7 @@ class Carros extends Controller
             if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
                 $this->carroServer->validarIgualdade($formulario, $carro);
                 $this->carroServer->editCarroBD($formulario, $carro['idtb_carro']);
-                Url::redirecionar('carros/tbCarro');
+                Url::redirecionar('carros/index');
             endif;
         }
 

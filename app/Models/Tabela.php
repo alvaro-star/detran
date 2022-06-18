@@ -3,7 +3,41 @@ class Tabela extends Database
 {
 
     //Criacao de Tabelas
+    public function criarTabelaCarroUsuario(){
+        $this->query("CREATE TABLE IF NOT EXISTS `tb_usuario` ( `idtb_usuario` int(11) NOT NULL,
+                                                                `nome` varchar(45) NOT NULL,
+                                                                `email` varchar(45) NOT NULL,
+                                                                `senha` varchar(45) NOT NULL,
+                                                                `criado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+                                                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        
+        
+                                                                CREATE TABLE `tb_carro` (
+                                                                `idtb_carro` int(10) UNSIGNED NOT NULL,
+                                                                `usuario_id` int(10) UNSIGNED NOT NULL,
+                                                                `nome` varchar(20) DEFAULT NULL,
+                                                                `placa` varchar(20) DEFAULT NULL,
+                                                                `postado_em` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+                                                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                                                                
+                                                                
+                                                                ALTER TABLE `tb_carro`
+                                                                ADD PRIMARY KEY (`idtb_carro`),
+                                                                ADD KEY `tb_carro_FKIndex1` (`usuario_id`);
+                                                                
+                                                                
+                                                                ALTER TABLE `tb_usuario`
+                                                                ADD PRIMARY KEY (`idtb_usuario`);
+                                                                
+                                                                ALTER TABLE `tb_carro`
+                                                                MODIFY `idtb_carro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+                                                                
+                                                                
+                                                                ALTER TABLE `tb_usuario`
+                                                                MODIFY `idtb_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;");
 
+        $this->executar();
+    }
     public function criarTabelaUsuario()
     {
         $this->query("CREATE TABLE IF NOT EXISTS `tb_usuario` ( `idtb_usuario` INT UNSIGNED NULL AUTO_INCREMENT,
@@ -12,6 +46,7 @@ class Tabela extends Database
                                                                     `senha` VARCHAR(100) NOT NULL,
                                                                     PRIMARY KEY (`idtb_usuario`))
                                                                     ENGINE = InnoDB");
+
         $this->executar();
     }
 

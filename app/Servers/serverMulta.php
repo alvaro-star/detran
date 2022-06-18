@@ -99,6 +99,22 @@ class serverMulta extends Controller
         $this->multaModel->insertBD();
     }
 
+    public function editMultaBD($multa, $id){
+        $carro = $this->carroServer->getCarro($multa['tb_carro_idtb_carro']);
+        $infracao = $this->infracaoServer->getInfracao($multa['tb_infracao_idtb_infracao']);
+        $this->multaModel->newInfracao($multa['ano'], $multa['cidade'], $carro, $multa, $id);
+        $this->multaModel->updateBD();
+    }
+
+    public function validarIgualdade($formulario, $multa){
+        //echo Validar::areDiferents($formulario, $infracao);
+        if(Validar::areDiferents($formulario, $multa)){
+            Sessao::mensagem('edit', 'Alteracoes salvas');
+        }else{
+            Sessao::mensagem('edit', 'Nenhuma Alteracao foi realizada', 'alert alert-secondary');
+        }
+    }
+
     public function removeMulta($id)
     {
         $multa = $this->getMulta($id);

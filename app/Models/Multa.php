@@ -35,6 +35,16 @@ class Multa
         $this->db->executar();
     }
 
+    public function updateBD()
+    {
+        $this->db->query("UPDATE `tb_multa` SET `ano`='[value-2]',`cidade`='[value-3]',`tb_carro_idtb_carro`='[value-4]',`tb_infracao_idtb_infracao`='[value-5]' WHERE `idtb_multa`='[value-1]',");
+        $this->db->bind(":ano", $this->ano);
+        $this->db->bind(":cidade", $this->cidade);
+        $this->db->bind(":idtb_carro", $this->carro->getId());
+        $this->db->bind(":idtb_infracao", $this->infracao->getId());
+        $this->db->executar();
+    }
+
     public function removeBD()
     {
         $this->db->query("DELETE FROM `tb_multa` WHERE `tb_multa`.`idtb_multa` " . '=' . " :id");

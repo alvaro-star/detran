@@ -14,15 +14,15 @@
 
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="<?=URL?>/carros/tbCarro" data-tooltip="tooltip" title="Carro">Carro</a>
+                        <a class="nav-link" href="<?=URL?>/carros/" data-tooltip="tooltip" title="Carro">Carro</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="<?=URL?>/infracoes/tbInfracao" data-tooltip="tooltip" title="Infracao">Infracao</a>
+                        <a class="nav-link" href="<?=URL?>/infracoes/" data-tooltip="tooltip" title="Infracao">Infracao</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="<?=URL?>/multas/tbMulta" data-tooltip="tooltip" title="Multa">Multa</a>
+                        <a class="nav-link" href="<?=URL?>/multas/" data-tooltip="tooltip" title="Multa">Multa</a>
                     </li>
                     
                     <li class="nav-item">

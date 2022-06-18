@@ -1,6 +1,7 @@
 <div class='container div-principal'>
 
     <?= Sessao::mensagem('delete') ?>
+    <?= Sessao::mensagem('edit') ?>
     <h3>Tabela de Multas</h3>
     <table class="table table-striped">
         <thead>

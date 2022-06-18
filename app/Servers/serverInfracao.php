@@ -71,6 +71,20 @@ class serverInfracao extends Controller
         return $dados;
     }
 
+    public function validarIgualdade($formulario, $infracao){
+        //echo Validar::areDiferents($formulario, $infracao);
+        if(Validar::areDiferents($formulario, $infracao)){
+            Sessao::mensagem('edit', 'Alteracoes salvas');
+        }else{
+            Sessao::mensagem('edit', 'Nenhuma Alteracao foi realizada', 'alert alert-secondary');
+        }
+    }
+
+    public function editInfracaoBD($infracao, $id){
+        $this->infracaoModel->newInfracao($infracao['descricao'], $infracao['pontos'], $infracao['valor'], $id);
+        $this->infracaoModel->updateBD();
+    }
+
     public function insertInfracaoBD($formulario)
     {
         $descricao = $formulario['descricao'];

@@ -9,7 +9,7 @@ class Infracoes extends Controller
         $this->infracaoServer = $this->server('Infracao');
     }
 
-    public function tbInfracao()
+    public function index()
     {
         $dados = $this->infracaoServer->getAllInfracoes();
         $this->view('paginas/viewInfracao', $dados);
@@ -23,7 +23,7 @@ class Infracoes extends Controller
 
         if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
             $this->infracaoServer->insertInfracaoBD($formulario);
-            Url::redirecionar('infracoes/tbInfracao');
+            Url::redirecionar('infracoes/index');
         endif;
 
         $this->view('forms/formInfracao', $dados);
@@ -39,6 +39,27 @@ class Infracoes extends Controller
             Sessao::mensagem('delete', 'A infracao possui uma multa, nao pode ser removido', 'alert alert-danger');
         endif;
 
-        Url::redirecionar('infracoes/tbInfracao');
+        Url::redirecionar('infracoes/index');
+    }
+
+    public function editInfracao($id){
+        $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $infracao = $this->infracaoServer->getInfracao($id);
+        $infracao = To::array($infracao);
+
+        if(is_null($formulario)){
+            $dados = $this->infracaoServer->validarCampos($infracao);
+        }else{
+            $dados = $this->infracaoServer->validarCampos($formulario);
+            
+            if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
+                $this->infracaoServer->validarIgualdade($formulario, $infracao);
+                $this->infracaoServer->editInfracaoBD($formulario, $infracao['idtb_infracao']);
+                Url::redirecionar('infracoes/index');
+            endif;
+        }
+
+        $dados['dado']['idtb_infracao'] = $infracao['idtb_infracao'];
+        $this->view('forms/formInfracao', $dados);
     }
 }

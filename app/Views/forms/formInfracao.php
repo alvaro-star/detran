@@ -1,7 +1,12 @@
 <div class='container div-principal'>
-    <form class="container" action=<?= URL . "/infracoes/insertInfracao" ?> method="POST">
 
-        <h3>Infracao</h3>
+<?php if(!(isset($dados['dado']['idtb_infracao']) == NULL)): ?>
+        <form class="container" action= "<?=URL."/infracoes/editInfracao/".$dados['dado']['idtb_infracao']?>" method="POST">
+        <h3> Editar o Carro <?=$dados['dado']['descricao']?></h3>
+    <?php else: ?>
+        <form class="container" action=<?= URL . "/infracoes/insertInfracao" ?> method="POST">
+            <h3>Infracao</h3>
+    <?php endif?>
 
         <div class="form-floating">
             <input value="<?= $dados['dado']['descricao'] ?>" name="descricao" class="form-control <?= $dados['erro']['descricao'] ? 'is-invalid' : '' ?>" placeholder="Descricao">
@@ -27,7 +32,7 @@
             </div>
         </div>
 
-        <input class='btn btn-primary' type="submit" name="btn" value="Enviar">
+        <button class="btn btn-primary"> Enviar</button>
 
     </form>
 </div>

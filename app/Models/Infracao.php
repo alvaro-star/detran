@@ -2,6 +2,7 @@
     class Infracao{
 
         private $db;
+        
         private $id;
         private $descricao;
         private $pontos;
@@ -23,6 +24,15 @@
             $this->db->bind(":descricao", $this->descricao);
             $this->db->bind(":pontos", $this->pontos);
             $this->db->bind(":valor", $this->valor);
+            $this->db->executar();
+        }
+
+        public function updateBD(){
+            $this->db->query("UPDATE `tb_infracao` SET `descricao` = :descricao, `pontos` = :pontos, `valor` = :valor WHERE `tb_infracao`.`idtb_infracao` = :id");
+            $this->db->bind(':descricao', $this->descricao);
+            $this->db->bind(':pontos', $this->pontos);
+            $this->db->bind(':valor', $this->valor);
+            $this->db->bind(':id', $this->id);
             $this->db->executar();
         }
 
