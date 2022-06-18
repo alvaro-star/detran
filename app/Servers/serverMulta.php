@@ -102,7 +102,7 @@ class serverMulta extends Controller
     public function editMultaBD($multa, $id){
         $carro = $this->carroServer->getCarro($multa['tb_carro_idtb_carro']);
         $infracao = $this->infracaoServer->getInfracao($multa['tb_infracao_idtb_infracao']);
-        $this->multaModel->newInfracao($multa['ano'], $multa['cidade'], $carro, $multa, $id);
+        $this->multaModel->newInfracao($multa['ano'], $multa['cidade'], $carro, $infracao, $id);
         $this->multaModel->updateBD();
     }
 
@@ -130,6 +130,14 @@ class serverMulta extends Controller
     {
         $this->db->query("SELECT * FROM `tb_multa` where `idtb_multa` " . '=' . " $id");
         return $this->db->resultado();
+    }
+
+    public function getMultaArray($id){
+        $this->db->query("SELECT * FROM `tb_multa` where `idtb_multa` " . '=' . " $id");
+        
+        $carro = To::array($this->db->resultado());
+
+
     }
 
     public function getAllMultas()

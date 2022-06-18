@@ -40,6 +40,8 @@ class Multas extends Controller
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $multa = $this->multaServer->getMulta($id);
         $multa = To::array($multa);
+        $multa['idtb_carro'] = $multa['tb_carro_idtb_carro'];
+        $multa['idtb_infracao'] = $multa['tb_infracao_idtb_infracao'];
 
         if(is_null($formulario)){
             $dados = $this->multaServer->validarCampos($multa);
