@@ -163,7 +163,7 @@
             $_SESSION['usuario_id'] = $usuario->idtb_usuario;
             $_SESSION['usuario_nome'] = $usuario->nome;
             $_SESSION['usuario_email'] = $usuario->email;
-            Url::redirecionar('paginas/home');
+            Url::redirecionar('Carros/index');
         }
 
         public function sair(){

@@ -6,6 +6,11 @@ class Carros extends Controller
 
     public function __construct()
     {
+        if (!Sessao::estaLogado()) :
+            Url::redirecionar('usuarios/login');
+        endif;
+
+        $this->db = new Database();
         $this->carroServer = $this->server('Carro');
     }
 
@@ -22,9 +27,9 @@ class Carros extends Controller
 
         if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
             $this->carroServer->insertCarroBD($formulario);
-            Url::redirecionar('carros/tbCarro/');
+            Url::redirecionar('carros');
         endif;
-        $this->view('forms/formCarro/', $dados);
+        $this->view('forms/formCarro', $dados);
     }
 
     public function removeCarro($id)

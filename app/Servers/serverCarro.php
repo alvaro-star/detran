@@ -15,29 +15,41 @@ class serverCarro extends Controller
         if (isset($formulario)) :
             $dados = [
                 'dado' => [
-                    'placa' => trim($formulario['placa'])
+                    'placa' => trim($formulario['placa']),
+                    'nome' => trim($formulario['nome'])
                 ],
                 'erro' => [
-                    'placa' => ''
+                    'placa' => '',
+                    'nome' => ''
                 ]
             ];
 
-            //Validar E-mail
+            //Validar a Placa e nome
             if (Validar::PLaca($formulario['placa'])) :
                 $dados['erro']['placa'] = 'Digite corretamente a placa';
+            endif;
+
+            if (Validar::Text($formulario['nome'], 100)) :
+                $dados['erro']['nome'] = 'Digite corretamente o Nome';
             endif;
 
             //Verifica se estao vazias
             if (empty($formulario['placa'])) :
                 $dados['erro']['placa'] =  'Preencha o campo Placa';
             endif;
+
+            if (empty($formulario['nome'])) :
+                $dados['erro']['nome'] =  'Preencha o campo Nome';
+            endif;
         else :
             $dados = [
                 'dado' => [
-                    'placa' => ''
+                    'placa' => '',
+                    'nome' => ''
                 ],
                 'erro' => [
-                    'placa' => ''
+                    'placa' => '',
+                    'nome' => ''
                 ]
             ];
         endif;
@@ -45,10 +57,11 @@ class serverCarro extends Controller
         return $dados;
     }
 
-    public function validarIgualdade($formulario, $carro){
-        if(Validar::areDiferents($formulario, $carro)){
+    public function validarIgualdade($formulario, $carro)
+    {
+        if (Validar::areDiferents($formulario, $carro)) {
             Sessao::mensagem('edit', 'Alteracoes salvas');
-        }else{
+        } else {
             Sessao::mensagem('edit', 'Nenhuma Alteracao foi realizada', 'alert alert-secondary');
         }
     }
@@ -56,25 +69,27 @@ class serverCarro extends Controller
     public function insertCarroBD($formulario)
     {
         $placa = $formulario['placa'];
-        $this->carroModel->newCarro($placa);
+        $nome = $formulario['nome'];
+        $this->carroModel->newCarro($placa, $nome);
         $this->carroModel->insertBD();
     }
 
-    public function editCarroBD($carro, $id){
-        $this->carroModel->newCarro($carro['placa'], $id);
+    public function editCarroBD($carro, $id)
+    {
+        $this->carroModel->newCarro($carro['placa'], $carro['nome'], $id);
         $this->carroModel->updateBD();
     }
 
     public function removeCarro($id)
     {
         $carro = $this->getCarro($id);
-        $this->carroModel->newCarro($carro->placa, $carro->idtb_carro);
+        $this->carroModel->newCarro($carro->placa, $carro->nome, $carro->idtb_carro);
         $this->carroModel->removeBD();
     }
 
     public function getAllCarros()
     {
-        $this->db->query("SELECT * FROM `tb_carro`;");
+        $this->db->query("SELECT tb_carro.idtb_carro, tb_usuario.nome as nome_usuario, tb_carro.nome as nome_carro, tb_carro.placa, tb_carro.postado_em FROM tb_carro, tb_usuario WHERE tb_carro.usuario_id = tb_usuario.idtb_usuario; ");
         return $this->db->resultados();
     }
 
