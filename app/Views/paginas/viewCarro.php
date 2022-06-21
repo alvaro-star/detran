@@ -1,9 +1,14 @@
 <div class='container div-principal'>
-    
-    <?=Sessao::mensagem('delete')?>
-    <?=Sessao::mensagem('edit')?>
+
+    <?= Sessao::mensagem('delete') ?>
+    <?= Sessao::mensagem('edit') ?>
 
     <h3>Tabela de Carros</h3>
+
+    <form action= "<?= URL ?>/carros/search" class="form-inline my-2 my-md-0" method="POST">
+        <input class="form-control" placeholder="Search">
+    </form>
+    
     <table class="table table-striped">
         <thead>
             <tr>

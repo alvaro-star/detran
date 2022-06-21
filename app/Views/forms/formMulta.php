@@ -1,14 +1,18 @@
     <div class='container div-principal '>
-        <form class="container " action=<?= URL . "/multas/insertMulta" ?> method="POST">
 
+    <?php if(!(isset($dados['dado']['idtb_multa']) == NULL)): ?>
+        <form class="container" action= "<?=URL."/multas/editMulta/".$dados['dado']['idtb_multa']?>" method="POST">
+        <h3> Editar a multa <?=$dados['dado']['idtb_multa']?></h3>
+    <?php else: ?>
+            <form class="container " action=<?= URL . "/multas/insertMulta" ?> method="POST">
             <h3>Multa</h3>
-            <div class="form-floating">
-                <input value="<?= $dados['dado']['ano'] ?>" name="ano" class="form-control <?= $dados['erro']['ano'] ? 'is-invalid' : '' ?>" placeholder="Ano">
-                <label for="floatingPassword">Ano</label>
-                <div class="invalid-feedback">
-                    <?= $dados['erro']['ano'] ?>
-                </div>
-            </div>
+    <?php endif?>
+
+            <select name='ano' class="form-select form-select-lg mb-3 <?= $dados['erro']['ano'] ? 'is-invalid' : '' ?>" aria-label=".form-select-lg example">
+                <?php for ($i = date('Y'); $i > 1000; $i--) : ?>
+                    <option <?= ($i == $dados['dado']['ano']) ? 'selected' : '' ?> value= <?=$i ?>> <?= $i ?> </option>
+                <?php endfor ?>
+            </select>
 
             <div class="form-floating">
                 <input value="<?= $dados['dado']['cidade'] ?>" name="cidade" class="form-control <?= $dados['erro']['cidade'] ? 'is-invalid' : '' ?>" placeholder="Cidade">

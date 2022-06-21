@@ -49,6 +49,7 @@ class Infracoes extends Controller
         $dados['dado']['idtb_infracao'] = $infracao['idtb_infracao'];
         $this->view('forms/formInfracao', $dados);
     }
+
     
     public function removeInfracao($id)
     {
@@ -59,8 +60,13 @@ class Infracoes extends Controller
         else:
             Sessao::mensagem('delete', 'A infracao possui uma multa, nao pode ser removido', 'alert alert-danger');
         endif;
-
+        
         Url::redirecionar('infracoes/index');
     }
-
+    
+    public function search(){
+        $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $dados = $this->infracaoServer->search($formulario['descricao']);
+        $this->view('paginas/viewInfracao', $dados);
+    }
 }

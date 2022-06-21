@@ -100,16 +100,15 @@ class serverMulta extends Controller
     }
 
     public function editMultaBD($multa, $id){
-        $carro = $this->carroServer->getCarro($multa['tb_carro_idtb_carro']);
-        $infracao = $this->infracaoServer->getInfracao($multa['tb_infracao_idtb_infracao']);
-        $this->multaModel->newInfracao($multa['ano'], $multa['cidade'], $carro, $infracao, $id);
+        $carro = $this->carroServer->getCarro($multa['idtb_carro']);
+        $infracao = $this->infracaoServer->getInfracao($multa['idtb_infracao']);
+        $this->multaModel->newMulta($multa['ano'], $multa['cidade'], $carro, $infracao, $id);
         $this->multaModel->updateBD();
     }
 
     public function removeMulta($id)
     {
         $multa = $this->getMulta($id);
-
         $carro = $this->carroServer->getCarro($multa->tb_carro_idtb_carro);
         $infracao = $this->infracaoServer->getInfracao($multa->tb_infracao_idtb_infracao);
         $this->multaModel->newMulta($multa->ano, $multa->cidade, $carro, $infracao, $multa->idtb_multa);
@@ -117,18 +116,15 @@ class serverMulta extends Controller
         $this->multaModel->removeBD();
     }
 
+    public function search($descricao){
+        $this->db->query("SELECT * FROM tb_infracao WHERE descricao LIKE '%$descricao%'; ");
+        return $this->db->resultados();
+    }
+
     public function getMulta($id)
     {
         $this->db->query("SELECT * FROM `tb_multa` where `idtb_multa` " . '=' . " $id");
         return $this->db->resultado();
-    }
-
-    public function getMultaArray($id){
-        $this->db->query("SELECT * FROM `tb_multa` where `idtb_multa` " . '=' . " $id");
-        
-        $carro = To::array($this->db->resultado());
-
-
     }
 
     public function getAllMultas()

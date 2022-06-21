@@ -89,6 +89,11 @@ class serverCarro extends Controller
         $this->carroModel->removeBD();
     }
 
+    public function search($placa){
+        $this->db->query("SELECT * FROM tb_carro WHERE placa LIKE '%$placa%'; ");
+        return $this->db->resultados();
+    }
+
     public function getAllCarros()
     {
         $this->db->query("SELECT tb_carro.idtb_carro, tb_usuario.nome as nome_usuario, tb_carro.nome as nome_carro, tb_carro.placa, tb_carro.postado_em FROM tb_carro, tb_usuario WHERE tb_carro.usuario_id = tb_usuario.idtb_usuario; ");

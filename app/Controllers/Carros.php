@@ -55,7 +55,7 @@ class Carros extends Controller
             $this->view('forms/formCarro', $dados);
         } else {
             Sessao::mensagem('edit', 'Vc nao criou este carro, portanto nao pode editalo', 'alert alert-danger');
-            $this->view('carros/index');
+            Url::redirecionar('carros/index');
         }
     }
 
@@ -74,5 +74,11 @@ class Carros extends Controller
         }
         
         Url::redirecionar('carros/index');
+    }
+
+    public function search(){
+        $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $dados = $this->carroServer->search($formulario['placa']);
+        $this->view('paginas/viewCarro', $dados);
     }
 }

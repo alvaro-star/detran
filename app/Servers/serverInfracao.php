@@ -93,6 +93,11 @@ class serverInfracao extends Controller
         $this->infracaoModel->removeBD();
     }
 
+    public function search($descricao){
+        $this->db->query("SELECT * FROM tb_infracao WHERE descricao LIKE '%$descricao%'; ");
+        return $this->db->resultados();
+    }
+
     public function getAllInfracoes()
     {
         $this->db->query("SELECT * FROM `tb_infracao`");
