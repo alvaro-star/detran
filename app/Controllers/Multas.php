@@ -18,16 +18,15 @@ class Multas extends Controller
         $dados = $this->multaServer->getAllMultas();
         $this->view('paginas/viewMulta', $dados);
     }
-
+    
     public function insertMulta()
     {
         //Formulario es um vetor
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
         $dados = $this->multaServer->validarCampos($formulario);
         $dados['carros'] = $this->carroServer->getAllCarros();
         $dados['infracoes'] = $this->infracaoServer->getAllInfracoes();
-
+        
         if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
             $this->multaServer->insertMultaBD($formulario);
             Url::redirecionar('multas/index');
@@ -49,7 +48,7 @@ class Multas extends Controller
             $dados = $this->multaServer->validarCampos($formulario);
             
             if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
-                $this->multaServer->validarIgualdade($formulario, $multa);
+                Validar::validarIgualdade('edit', $formulario, $multa);
                 $this->multaServer->editMultaBD($formulario, $multa['idtb_multa']);
                 Url::redirecionar('multas/index');
             endif;

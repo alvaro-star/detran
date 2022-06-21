@@ -21,7 +21,7 @@ class Multa
         $this->id = $id;
         $this->ano = $ano;
         $this->cidade = $cidade;
-        $this->carro->newCarro($carro->placa, $carro->idtb_carro);
+        $this->carro->newCarro($carro->nome, $carro->placa, $carro->idtb_carro);
         $this->infracao->newInfracao($infracao->descricao, $infracao->pontos, $infracao->valor, $infracao->idtb_infracao);
     }
 
@@ -37,7 +37,7 @@ class Multa
 
     public function updateBD()
     {
-        $this->db->query("UPDATE `tb_multa` SET `ano` ".'='.":ano,`cidade`= :cidade,`tb_carro_idtb_carro`= :idtb_carro,`tb_infracao_idtb_infracao`= :idtb_infracao WHERE `idtb_multa`= :idtb_multa");
+        $this->db->query("UPDATE `tb_multa` SET `ano` = :ano,`cidade` = :cidade,`tb_carro_idtb_carro` = :idtb_carro,`tb_infracao_idtb_infracao`= :idtb_infracao WHERE `idtb_multa`= :idtb_multa");
         $this->db->bind(":ano", $this->ano);
         $this->db->bind(":cidade", $this->cidade);
         $this->db->bind(":idtb_carro", $this->carro->getId());

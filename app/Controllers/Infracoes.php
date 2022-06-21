@@ -29,6 +29,27 @@ class Infracoes extends Controller
         $this->view('forms/formInfracao', $dados);
     }
 
+    public function editInfracao($id){
+        $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $infracao = $this->infracaoServer->getInfracao($id);
+        $infracao = To::array($infracao);
+
+        if(is_null($formulario)){
+            $dados = $this->infracaoServer->validarCampos($infracao);
+        }else{
+            $dados = $this->infracaoServer->validarCampos($formulario);
+            
+            if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
+                Validar::validarIgualdade('edit', $formulario, $infracao);
+                $this->infracaoServer->editInfracaoBD($formulario, $infracao['idtb_infracao']);
+                Url::redirecionar('infracoes/index');
+            endif;
+        }
+
+        $dados['dado']['idtb_infracao'] = $infracao['idtb_infracao'];
+        $this->view('forms/formInfracao', $dados);
+    }
+    
     public function removeInfracao($id)
     {
         $multasInfracoes = $this->infracaoServer->getAllMultas($id);
@@ -42,24 +63,4 @@ class Infracoes extends Controller
         Url::redirecionar('infracoes/index');
     }
 
-    public function editInfracao($id){
-        $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $infracao = $this->infracaoServer->getInfracao($id);
-        $infracao = To::array($infracao);
-
-        if(is_null($formulario)){
-            $dados = $this->infracaoServer->validarCampos($infracao);
-        }else{
-            $dados = $this->infracaoServer->validarCampos($formulario);
-            
-            if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
-                $this->infracaoServer->validarIgualdade($formulario, $infracao);
-                $this->infracaoServer->editInfracaoBD($formulario, $infracao['idtb_infracao']);
-                Url::redirecionar('infracoes/index');
-            endif;
-        }
-
-        $dados['dado']['idtb_infracao'] = $infracao['idtb_infracao'];
-        $this->view('forms/formInfracao', $dados);
-    }
 }

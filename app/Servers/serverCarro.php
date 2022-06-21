@@ -16,11 +16,13 @@ class serverCarro extends Controller
             $dados = [
                 'dado' => [
                     'placa' => trim($formulario['placa']),
-                    'nome' => trim($formulario['nome'])
+                    'nome' => trim($formulario['nome']),
+                    'usuario_id' => $_SESSION['usuario_id']
                 ],
                 'erro' => [
                     'placa' => '',
-                    'nome' => ''
+                    'nome' => '',
+                    'usuario_id' => ''
                 ]
             ];
 
@@ -33,6 +35,10 @@ class serverCarro extends Controller
                 $dados['erro']['nome'] = 'Digite corretamente o Nome';
             endif;
 
+            if (Validar::NumberInt($_SESSION['usuario_id'], 100)) :
+                $dados['erro']['usuario_id'] = 'Digite corretamente o Nome';
+            endif;
+
             //Verifica se estao vazias
             if (empty($formulario['placa'])) :
                 $dados['erro']['placa'] =  'Preencha o campo Placa';
@@ -40,6 +46,10 @@ class serverCarro extends Controller
 
             if (empty($formulario['nome'])) :
                 $dados['erro']['nome'] =  'Preencha o campo Nome';
+            endif;
+
+            if (empty($_SESSION['usuario_id'])) :
+                $dados['erro']['usuario_id'] =  'Preencha o campo Nome';
             endif;
         else :
             $dados = [
@@ -57,33 +67,25 @@ class serverCarro extends Controller
         return $dados;
     }
 
-    public function validarIgualdade($formulario, $carro)
-    {
-        if (Validar::areDiferents($formulario, $carro)) {
-            Sessao::mensagem('edit', 'Alteracoes salvas');
-        } else {
-            Sessao::mensagem('edit', 'Nenhuma Alteracao foi realizada', 'alert alert-secondary');
-        }
-    }
-
     public function insertCarroBD($formulario)
     {
         $placa = $formulario['placa'];
         $nome = $formulario['nome'];
-        $this->carroModel->newCarro($placa, $nome);
+        $usuario_id = $_SESSION['usuario_id'];
+        $this->carroModel->newCarro($nome, $placa, NULL, $usuario_id);
         $this->carroModel->insertBD();
     }
 
     public function editCarroBD($carro, $id)
     {
-        $this->carroModel->newCarro($carro['placa'], $carro['nome'], $id);
+        $this->carroModel->newCarro($carro['nome'], $carro['placa'], $id);
         $this->carroModel->updateBD();
     }
 
     public function removeCarro($id)
     {
         $carro = $this->getCarro($id);
-        $this->carroModel->newCarro($carro->placa, $carro->nome, $carro->idtb_carro);
+        $this->carroModel->newCarro($carro->nome, $carro->placa, $carro->idtb_carro);
         $this->carroModel->removeBD();
     }
 
@@ -109,8 +111,13 @@ class serverCarro extends Controller
 
     public function checarCarro($id)
     {
-        $this->db->query("SELECT * FROM `tb_carro` WHERE `idtb_carro` " . '=' . " :id");
+        $this->db->query("SELECT * FROM `tb_carro` WHERE `idtb_carro` = :id");
         $this->db->bind(':id', $id);
         return ($this->db->resultado()) ? true : false;
+    }
+
+    public function isYourCar($id){
+        $carro = $this->getCarro($id);
+        return ($carro->usuario_id == $_SESSION['usuario_id']) ? true : false;
     }
 }

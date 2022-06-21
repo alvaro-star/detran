@@ -106,15 +106,6 @@ class serverMulta extends Controller
         $this->multaModel->updateBD();
     }
 
-    public function validarIgualdade($formulario, $multa){
-        //echo Validar::areDiferents($formulario, $infracao);
-        if(Validar::areDiferents($formulario, $multa)){
-            Sessao::mensagem('edit', 'Alteracoes salvas');
-        }else{
-            Sessao::mensagem('edit', 'Nenhuma Alteracao foi realizada', 'alert alert-secondary');
-        }
-    }
-
     public function removeMulta($id)
     {
         $multa = $this->getMulta($id);
