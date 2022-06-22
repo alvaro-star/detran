@@ -19,7 +19,7 @@ class Multas extends Controller
         $this->view('paginas/viewMulta', $dados);
     }
 
-    public function insertMulta()
+    public function insert()
     {
         //Formulario es um vetor
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -35,7 +35,7 @@ class Multas extends Controller
         $this->view('forms/formMulta', $dados);
     }
 
-    public function editMulta($id)
+    public function edit($id)
     {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $multa = $this->multaServer->getMulta($id);
@@ -62,7 +62,7 @@ class Multas extends Controller
         $this->view('forms/formMulta', $dados);
     }
 
-    public function removeMulta($id)
+    public function remove($id)
     {
         $this->multaServer->removeMulta($id);
         Sessao::mensagem('delete', 'A multa foi removido com sucesso');

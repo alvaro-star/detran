@@ -26,13 +26,13 @@
                     <td><?= $infracao->pontos ?></td>
                     <td><?= $infracao->valor ?></td>
                     <td>
-                        <a class="btn btn-warning" href="<?= URL ?>/infracoes/editInfracao/<?= $infracao->idtb_infracao ?>">Editar</a>
-                        <a class="btn btn-danger" href="<?= URL ?>/infracoes/removeInfracao/<?= $infracao->idtb_infracao ?>">Remover</a>
+                        <a class="btn btn-warning" href="<?= URL ?>/infracoes/edit/<?= $infracao->idtb_infracao ?>">Editar</a>
+                        <a class="btn btn-danger" href="<?= URL ?>/infracoes/remove/<?= $infracao->idtb_infracao ?>">Remover</a>
                     </td>
                 </tr>
             <?php endforeach ?>
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="<?= URL ?>/infracoes/insertInfracao">Primary</a>
+    <a class="btn btn-primary" href="<?= URL ?>/infracoes/insert">Primary</a>
 </div>

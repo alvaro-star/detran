@@ -29,12 +29,12 @@
                     <td><?= $multa->placa ?></td>
                     <td><?= $multa->descricao ?></td>
                     <td>
-                        <a class="btn btn-warning" href="<?= URL ?>/multas/editMulta/<?= $multa->idtb_multa ?>">Editar</a>
-                        <a class="btn btn-danger" href="<?= URL ?>/multas/removeMulta/<?= $multa->idtb_multa ?>">Remover</a>
+                        <a class="btn btn-warning" href="<?= URL ?>/multas/edit/<?= $multa->idtb_multa ?>">Editar</a>
+                        <a class="btn btn-danger" href="<?= URL ?>/multas/remove/<?= $multa->idtb_multa ?>">Remover</a>
                     </td>
                 </tr>
             <?php endforeach ?>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="<?= URL ?>/multas/insertMulta">Primary</a>
+    <a class="btn btn-primary" href="<?= URL ?>/multas/insert">Primary</a>
 </div>
