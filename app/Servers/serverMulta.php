@@ -131,7 +131,20 @@ class serverMulta extends Controller
 
     public function getAllMultas()
     {
+        /*$this->db->query("SELECT * FROM tb_multa");
+        $multas = $this->db->resultados();
+        //var_dump($multas);
+        foreach ($multas as $multa) {
+            $carro = $this->carroServer->getCarro($multa->tb_carro_idtb_carro);
+            $infracao = $this->infracaoServer->getInfracao($multa->tb_infracao_idtb_infracao);
+
+            $this->carroServer->getModel()->newCarro($carro->nome, $carro->placa, $carro->idtb_carro);
+            $this->infracaoServer->getModel()->newInfracao($infracao->descricao, $infracao->pontos, $infracao->valor, $infracao->idtb_infracao);
+            $this->multaModel->newMulta($multa->ano, $multa->cidade, $this->carroServer->getModel, $this->infracaoServer->getModel, $multa->idtb_multa);
+            $multa = $this->multaModel;
+        }*/
         $this->db->query("SELECT tb_multa.idtb_multa, tb_multa.ano, tb_multa.cidade, tb_carro.placa, tb_infracao.descricao, tb_carro.idtb_carro, tb_infracao.idtb_infracao FROM `tb_multa` INNER JOIN `tb_carro` ON tb_carro.idtb_carro = tb_multa.tb_carro_idtb_carro INNER JOIN `tb_infracao` ON tb_infracao.idtb_infracao = tb_multa.tb_infracao_idtb_infracao;");
+        
         return $this->db->resultados();
     }
 }

@@ -124,4 +124,8 @@ class serverInfracao extends Controller
         $this->db->bind(':id', $id);
         return ($this->db->resultado()) ? true : false;
     }
+
+    public function getModel(){
+        return $this->carroModel;
+    }
 }

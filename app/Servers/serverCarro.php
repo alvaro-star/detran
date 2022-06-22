@@ -135,4 +135,8 @@ class serverCarro extends Controller
         $carro = $this->getCarro($id);
         return ($carro->usuario_id == $_SESSION['usuario_id']) ? true : false;
     }
+
+    public function getModel(){
+        return $this->carroModel;
+    }
 }
