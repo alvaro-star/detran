@@ -4,32 +4,6 @@ body{
     width: 100%;
 }
 
-form{
-    
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    /*background-color: blue;*/
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
-.btn{
-    width: 80px;
-    margin-top: 10px;
-}
-
 .div-principal{
-    margin-top: 10%;
-    border-radius: 8px;
-    background-color: rgb(218, 221, 226);
-    width: 250px;
-}
-
-.caixas{
-    margin-bottom: 10px;
-    border-color: blue;
+    background-color: black;
 }

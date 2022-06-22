@@ -31,7 +31,7 @@
                 </ul>
                 <?php if(isset($_SESSION['usuario_id'])):?>
                     <span class="navbar-text">
-                        <p>Olá, <?=$_SESSION['usuario_nome']?>, Seja bem-vindo!!</p>
+                        <p>Olá, <?=$_SESSION['usuario_nome']?></p>
                         <a class="btn btn-sm btn-danger" href="<?= URL ?>/Usuarios/sair" data-tooltip="tooltip" title="Sair do sistema">Sair</a>
                     </span>
                 <?php else: ?>

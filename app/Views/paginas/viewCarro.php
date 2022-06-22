@@ -3,7 +3,7 @@
     <?= Sessao::mensagem('delete') ?>
     <?= Sessao::mensagem('edit') ?>
 
-    <h3>Tabela de Carros</h3>
+    <h3>Carros</h3>
 
     <form action= "<?= URL ?>/carros/search" class="form-inline my-2 my-md-0" method="POST">
         <input name = "placa" class="form-control" placeholder="Placa">

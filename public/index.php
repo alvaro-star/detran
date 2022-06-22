@@ -11,8 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= APP_NAME?></title>
     <?php include(PUBLICO.'\css\bootstrapCss.php'); ?>
-    
-    <!--<link href="../public/css/stilo.css" rel="stylesheet">-->
+    <link href="<?=PUBLICO?>\css\stilo.css" rel="stylesheet">
 
 </head>
 <body>

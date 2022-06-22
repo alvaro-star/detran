@@ -1,7 +1,7 @@
 <div class='container div-principal text-center'>
     <?= Sessao::mensagem('delete') ?>
     <?= Sessao::mensagem('edit') ?>
-    <h3>Tabela de Tipo de Infracoes</h3>
+    <h3>Infracoes</h3>
 
     <form action= "<?= URL ?>/infracoes/search" class="form-inline my-2 my-md-0" method="POST">
         <input name = "descricao" class="form-control" placeholder="Descricao">
@@ -34,5 +34,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="<?= URL ?>/infracoes/insert">Primary</a>
+    <a class="btn btn-primary" href="<?= URL ?>/infracoes/insert">Inserir Infracao</a>
 </div>
