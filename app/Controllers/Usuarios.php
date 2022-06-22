@@ -138,7 +138,7 @@
                     if ($usuario) {
                         $this->criarSessaoUsuario($usuario);
                     } else {
-                        Sessao::mensagem('usuario', 'Usuaro ou senha Inválidos', 'alert alert-danger');
+                        Sessao::mensagem('usuario', 'Usuário ou senha Inválidos', 'alert alert-danger');
                     }
                     
                 endif;

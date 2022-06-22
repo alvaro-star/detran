@@ -12,7 +12,7 @@ class Tabela extends Database
                                                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
         
         
-                                                                CREATE TABLE `tb_carro` (
+                                    CREATE TABLE IF NOT EXISTS `tb_carro` (
                                                                 `idtb_carro` int(10) UNSIGNED NOT NULL,
                                                                 `usuario_id` int(10) UNSIGNED NOT NULL,
                                                                 `nome` varchar(20) DEFAULT NULL,
@@ -38,7 +38,7 @@ class Tabela extends Database
 
         $this->executar();
     }
-    public function criarTabelaUsuario()
+    /*public function criarTabelaUsuario()
     {
         $this->query("CREATE TABLE IF NOT EXISTS `tb_usuario` ( `idtb_usuario` INT UNSIGNED NULL AUTO_INCREMENT,
                                                                     `nome` VARCHAR(200) NOT NULL,
@@ -66,7 +66,7 @@ class Tabela extends Database
             $this->query("INSERT INTO tb_carro (`placa`) VALUES ('$placa')");
             $this->executar();
         endfor;
-    }
+    }*/
 
     public function criarTabelaInfracao()
     {

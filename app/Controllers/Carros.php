@@ -4,6 +4,7 @@ class Carros extends Controller
 
     private $carroServer;
     private $multaServer;
+    private $infracaServer;
 
     public function __construct()
     {
@@ -14,6 +15,7 @@ class Carros extends Controller
         $this->db = new Database();
         $this->carroServer = $this->server('Carro');
         $this->multaServer = $this->server('Multa');
+        $this->infracaoServer = $this->server('Infracao');
     }
 
     public function index()
@@ -21,13 +23,16 @@ class Carros extends Controller
 
         $multas = $this->multaServer->getAllMultas();
         $carros = $this->carroServer->getAllCarros();
-
+        //var_dump($carros);
+        //$infracao = $this->infracaServer->getInfracao();
 
         foreach ($carros as $carroDB) {
             $carroDB->valor_multas = 0;
             foreach ($multas as $multaDB) {
                 if ($multaDB->idtb_carro == $carroDB->idtb_carro) {
-                    $carroDB->valor_multas = $carroDB->valor_multas + $multaDB->valor;
+                    echo $multaDB->idtb_infracao;
+                    $infracao = $this->infracaoServer->getInfracao($multaDB->idtb_infracao);
+                    $carroDB->valor_multas = $carroDB->valor_multas + $infracao->valor;
                 }
             }
         }
