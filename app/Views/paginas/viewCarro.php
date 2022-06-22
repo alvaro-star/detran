@@ -32,13 +32,13 @@
                     <td><?= $carro->valor_multas ?></td>
                     <td><?= $carro->postado_em ?></td>
                     <td>
-                        <a class="btn btn-warning" href="<?= URL ?>/carros/editCarro/<?= $carro->idtb_carro ?>">Editar</a>
-                        <a class="btn btn-danger" href="<?= URL ?>/carros/removeCarro/<?= $carro->idtb_carro ?>">Remover</a>
+                        <a class="btn btn-warning" href="<?= URL ?>/carros/edit/<?= $carro->idtb_carro ?>">Editar</a>
+                        <a class="btn btn-danger" href="<?= URL ?>/carros/remove/<?= $carro->idtb_carro ?>">Remover</a>
                     </td>
                 </tr>
             <?php endforeach ?>
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="<?= URL ?>/carros/insertCarro">Inserir carro</a>
+    <a class="btn btn-primary" href="<?= URL ?>/carros/insert">Inserir carro</a>
 </div>

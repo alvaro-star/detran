@@ -90,6 +90,20 @@ class serverCarro extends Controller
         return $this->db->resultados();
     }
 
+    public function calcularTotalMultas($carros, $multas, $infracaoServer){
+        foreach ($carros as $carroDB) {
+            $carroDB->valor_multas = 0;
+            foreach ($multas as $multaDB) {
+                if ($multaDB->idtb_carro == $carroDB->idtb_carro) {
+                    $infracao = $infracaoServer->getInfracao($multaDB->idtb_infracao);
+                    $carroDB->valor_multas = $carroDB->valor_multas + $infracao->valor;
+                }
+            }
+        }
+
+        return $carros;
+    }
+
     public function getAllCarros()
     {
         $this->db->query("SELECT tb_carro.idtb_carro, tb_usuario.nome as nome_usuario, tb_carro.nome as nome_carro, tb_carro.placa, tb_carro.postado_em FROM tb_carro, tb_usuario WHERE tb_carro.usuario_id = tb_usuario.idtb_usuario");

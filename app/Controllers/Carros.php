@@ -4,7 +4,7 @@ class Carros extends Controller
 
     private $carroServer;
     private $multaServer;
-    private $infracaServer;
+    private $infracaoServer;
 
     public function __construct()
     {
@@ -23,24 +23,11 @@ class Carros extends Controller
 
         $multas = $this->multaServer->getAllMultas();
         $carros = $this->carroServer->getAllCarros();
-        //var_dump($carros);
-        //$infracao = $this->infracaServer->getInfracao();
-
-        foreach ($carros as $carroDB) {
-            $carroDB->valor_multas = 0;
-            foreach ($multas as $multaDB) {
-                if ($multaDB->idtb_carro == $carroDB->idtb_carro) {
-                    echo $multaDB->idtb_infracao;
-                    $infracao = $this->infracaoServer->getInfracao($multaDB->idtb_infracao);
-                    $carroDB->valor_multas = $carroDB->valor_multas + $infracao->valor;
-                }
-            }
-        }
-
+        $carros = $this->carroServer->calcularTotalMultas($carros, $multas, $this->infracaoServer);
         $this->view('paginas/viewCarro', $carros);
     }
 
-    public function insertCarro()
+    public function insert()
     {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $dados = $this->carroServer->validarCampos($formulario);
@@ -52,7 +39,7 @@ class Carros extends Controller
         $this->view('forms/formCarro', $dados);
     }
 
-    public function editCarro($id)
+    public function edit($id)
     {
         if ($this->carroServer->isYourCar($id)) {
             $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -79,7 +66,7 @@ class Carros extends Controller
         }
     }
 
-    public function removeCarro($id)
+    public function remove($id)
     {
         if ($this->carroServer->isYourCar($id)) {
             $multasCarro = $this->carroServer->getAllMultas($id);
@@ -100,7 +87,9 @@ class Carros extends Controller
     public function search()
     {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $dados = $this->carroServer->search($formulario['placa']);
-        $this->view('paginas/viewCarro', $dados);
+        $carros = $this->carroServer->search($formulario['placa']);
+        $multas = $this->multaServer->getAllMultas();
+        $carros = $this->carroServer->calcularTotalMultas($carros, $multas, $this->infracaoServer);
+        $this->view('paginas/viewCarro', $carros);
     }
 }

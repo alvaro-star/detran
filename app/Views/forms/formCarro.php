@@ -1,9 +1,9 @@
 <div class='container div-principal'>
     <?php if(!(isset($dados['dado']['idtb_carro']) == NULL)): ?>
-        <form class="container text-center" action= "<?=URL."/carros/editCarro/".$dados['dado']['idtb_carro']?>" method="POST">
+        <form class="container text-center" action= "<?=URL."/carros/edit/".$dados['dado']['idtb_carro']?>" method="POST">
         <h3> Editar o Carro <?=$dados['dado']['placa']?></h3>
     <?php else: ?>
-        <form class="container text-center" action= "<?=URL?>/Carros/insertCarro/" method="POST">
+        <form class="container text-center" action= "<?=URL?>/Carros/insert/" method="POST">
         <h3>Cadastro de Carro</h3>
     <?php endif?>
 
