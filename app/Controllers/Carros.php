@@ -3,6 +3,7 @@ class Carros extends Controller
 {
 
     private $carroServer;
+    private $multaServer;
 
     public function __construct()
     {
@@ -12,12 +13,26 @@ class Carros extends Controller
 
         $this->db = new Database();
         $this->carroServer = $this->server('Carro');
+        $this->multaServer = $this->server('Multa');
     }
 
     public function index()
     {
-        $dados = $this->carroServer->getAllCarros();
-        $this->view('paginas/viewCarro', $dados);
+
+        $multas = $this->multaServer->getAllMultas();
+        $carros = $this->carroServer->getAllCarros();
+
+
+        foreach ($carros as $carroDB) {
+            $carroDB->valor_multas = 0;
+            foreach ($multas as $multaDB) {
+                if ($multaDB->idtb_carro == $carroDB->idtb_carro) {
+                    $carroDB->valor_multas = $carroDB->valor_multas + $multaDB->valor;
+                }
+            }
+        }
+
+        $this->view('paginas/viewCarro', $carros);
     }
 
     public function insertCarro()
@@ -66,17 +81,19 @@ class Carros extends Controller
             if (!$multasCarro) :
                 $this->carroServer->removeCarro($id);
                 Sessao::mensagem('delete', 'O carro foi removido com sucesso');
+                Url::redirecionar('carros/index');
             else :
                 Sessao::mensagem('delete', 'O carro possui uma multa, nao pode ser removido', 'alert alert-danger');
+                Url::redirecionar("multas/search/$id");
             endif;
-        }else{
+        } else {
             Sessao::mensagem('delete', 'Vc nao pode remover este carro porque vc nao o criou', 'alert alert-danger');
+            Url::redirecionar('carros/index');
         }
-        
-        Url::redirecionar('carros/index');
     }
 
-    public function search(){
+    public function search()
+    {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $dados = $this->carroServer->search($formulario['placa']);
         $this->view('paginas/viewCarro', $dados);

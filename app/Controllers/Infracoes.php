@@ -57,11 +57,11 @@ class Infracoes extends Controller
         if (!$multasInfracoes) :
             $this->infracaoServer->removeInfracao($id);
             Sessao::mensagem('delete', 'A infracao foi removido com sucesso');
+            Url::redirecionar('infracoes/index');
         else:
             Sessao::mensagem('delete', 'A infracao possui uma multa, nao pode ser removido', 'alert alert-danger');
+            Url::redirecionar("multas/search/0/$id");
         endif;
-        
-        Url::redirecionar('infracoes/index');
     }
     
     public function search(){

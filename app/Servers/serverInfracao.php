@@ -106,7 +106,7 @@ class serverInfracao extends Controller
 
     public function getAllMultas($id)
     {
-        $this->db->query("SELECT * FROM `tb_multa` where `tb_infracao_idtb_infracao` " . '=' . " :id");
+        $this->db->query("SELECT tb_multa.idtb_multa, tb_multa.ano, tb_multa.cidade, tb_carro.placa, tb_infracao.descricao FROM `tb_multa` INNER JOIN `tb_carro` ON tb_carro.idtb_carro = tb_multa.tb_carro_idtb_carro INNER JOIN `tb_infracao` ON tb_infracao.idtb_infracao = tb_multa.tb_infracao_idtb_infracao WHERE tb_infracao.idtb_infracao = :id");
         $this->db->bind(':id', $id);
         return $this->db->resultados();
     }

@@ -6,7 +6,7 @@
     <h3>Tabela de Carros</h3>
 
     <form action= "<?= URL ?>/carros/search" class="form-inline my-2 my-md-0" method="POST">
-        <input class="form-control" placeholder="Search">
+        <input name = "placa" class="form-control" placeholder="Placa">
     </form>
     
     <table class="table table-striped">
@@ -16,6 +16,7 @@
                 <th scope="col">Usuario</th>
                 <th scope="col">Carro</th>
                 <th scope="col">Placa</th>
+                <th scope="col">Divida</th>
                 <th scope="col">Criado em:</th>
                 <th scope="col">Acao</th>
             </tr>
@@ -28,6 +29,7 @@
                     <td><?= $carro->nome_usuario ?></td>
                     <td><?= $carro->nome_carro ?></td>
                     <td><?= $carro->placa ?></td>
+                    <td><?= $carro->valor_multas ?></td>
                     <td><?= $carro->postado_em ?></td>
                     <td>
                         <a class="btn btn-warning" href="<?= URL ?>/carros/editCarro/<?= $carro->idtb_carro ?>">Editar</a>

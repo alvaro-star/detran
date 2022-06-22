@@ -4,10 +4,10 @@
     <?= Sessao::mensagem('edit') ?>
     <h3>Tabela de Multas</h3>
 
-    <form action= "<?= URL ?>/multas/search" class="form-inline my-2 my-md-0" method="POST">
-        <input class="form-control" placeholder="Search">
+    <form action="<?= URL ?>/multas/search" class="form-inline my-2 my-md-0" method="POST">
+        <input name="placa" class="form-control" placeholder="Placa">
     </form>
-    
+
     <table class="table table-striped">
         <thead>
             <tr>

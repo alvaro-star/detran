@@ -35,10 +35,6 @@ class serverCarro extends Controller
                 $dados['erro']['nome'] = 'Digite corretamente o Nome';
             endif;
 
-            if (Validar::NumberInt($_SESSION['usuario_id'], 100)) :
-                $dados['erro']['usuario_id'] = 'Digite corretamente o Nome';
-            endif;
-
             //Verifica se estao vazias
             if (empty($formulario['placa'])) :
                 $dados['erro']['placa'] =  'Preencha o campo Placa';
@@ -72,7 +68,7 @@ class serverCarro extends Controller
         $placa = $formulario['placa'];
         $nome = $formulario['nome'];
         $usuario_id = $_SESSION['usuario_id'];
-        $this->carroModel->newCarro($nome, $placa, NULL, $usuario_id);
+        $this->carroModel->newCarro($nome, $placa, 0, $usuario_id);
         $this->carroModel->insertBD();
     }
 
@@ -90,26 +86,26 @@ class serverCarro extends Controller
     }
 
     public function search($placa){
-        $this->db->query("SELECT * FROM tb_carro WHERE placa LIKE '%$placa%'; ");
+        $this->db->query("SELECT tb_carro.idtb_carro, tb_usuario.nome as nome_usuario, tb_carro.nome as nome_carro, tb_carro.placa, tb_carro.postado_em FROM tb_carro, tb_usuario WHERE tb_carro.usuario_id = tb_usuario.idtb_usuario and placa LIKE '%$placa%';");
         return $this->db->resultados();
     }
 
     public function getAllCarros()
     {
-        $this->db->query("SELECT tb_carro.idtb_carro, tb_usuario.nome as nome_usuario, tb_carro.nome as nome_carro, tb_carro.placa, tb_carro.postado_em FROM tb_carro, tb_usuario WHERE tb_carro.usuario_id = tb_usuario.idtb_usuario; ");
+        $this->db->query("SELECT tb_carro.idtb_carro, tb_usuario.nome as nome_usuario, tb_carro.nome as nome_carro, tb_carro.placa, tb_carro.postado_em FROM tb_carro, tb_usuario WHERE tb_carro.usuario_id = tb_usuario.idtb_usuario");
         return $this->db->resultados();
     }
 
     public function getAllMultas($id)
     {
-        $this->db->query("SELECT * FROM `tb_multa` where `tb_carro_idtb_carro` " . '=' . " :id");
+        $this->db->query("SELECT tb_multa.idtb_multa, tb_multa.ano, tb_multa.cidade, tb_carro.placa, tb_infracao.descricao FROM `tb_multa` INNER JOIN `tb_carro` ON tb_carro.idtb_carro = tb_multa.tb_carro_idtb_carro INNER JOIN `tb_infracao` ON tb_infracao.idtb_infracao = tb_multa.tb_infracao_idtb_infracao WHERE tb_carro.idtb_carro = :id");
         $this->db->bind(':id', $id);
         return $this->db->resultados();
     }
 
     public function getCarro($id)
     {
-        $this->db->query('SELECT * FROM `tb_carro` WHERE `idtb_carro` ' . '=' . ' :id');
+        $this->db->query('SELECT * FROM `tb_carro` WHERE `idtb_carro` = :id');
         $this->db->bind(':id', $id);
         return $this->db->resultado();
     }
