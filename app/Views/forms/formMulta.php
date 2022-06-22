@@ -1,10 +1,10 @@
     <div class='container div-principal '>
 
     <?php if(!(isset($dados['dado']['idtb_multa']) == NULL)): ?>
-        <form class="container" action= "<?=URL."/multas/editMulta/".$dados['dado']['idtb_multa']?>" method="POST">
+        <form class="container text-center" action= "<?=URL."/multas/editMulta/".$dados['dado']['idtb_multa']?>" method="POST">
         <h3> Editar a multa <?=$dados['dado']['idtb_multa']?></h3>
     <?php else: ?>
-            <form class="container " action=<?= URL . "/multas/insertMulta" ?> method="POST">
+            <form class="container text-center" action=<?= URL . "/multas/insertMulta" ?> method="POST">
             <h3>Multa</h3>
     <?php endif?>
 

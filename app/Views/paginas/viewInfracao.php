@@ -1,4 +1,4 @@
-<div class='container div-principal'>
+<div class='container div-principal text-center'>
     <?= Sessao::mensagem('delete') ?>
     <?= Sessao::mensagem('edit') ?>
     <h3>Tabela de Tipo de Infracoes</h3>

@@ -1,6 +1,6 @@
 <div class='container div-principal'>
 
-        <form class = "container" method="POST" action="<?=URL?>/usuarios/cadastrar">
+        <form class = "container text-center" method="POST" action="<?=URL?>/usuarios/cadastrar">
             <h1>Cadastre-se</h1>
             <div class="form-floating">
                 <input type="text" value = "<?=$dados['nome']?>" name = "nome" class="form-control <?=$dados['erro']['nome']?'is-invalid':''?>" id="floatingName" placeholder="Nome">
