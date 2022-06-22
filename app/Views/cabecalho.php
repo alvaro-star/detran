@@ -1,4 +1,18 @@
-<header class="bg-dark">
+<style>
+    #login{
+        display: flex;
+        position: absolute;
+        right: 0;
+    }
+    #login a, p{
+        margin-right: 10px;
+        height: 100%;
+    }
+    #topo{
+        padding: 15px;
+    }
+</style>
+<header class="bg-dark" id="topo">
     <div class="container">
         <nav class="navbar navbar-expand-sm navbar-dark">
             <a class="navbar-brand" href="<?= URL ?>">WEB 2</a>
@@ -30,7 +44,7 @@
                     </li>
                 </ul>
                 <?php if(isset($_SESSION['usuario_id'])):?>
-                    <span class="navbar-text">
+                    <span class="navbar-text" id="login">
                         <p>Olá, <?=$_SESSION['usuario_nome']?></p>
                         <a class="btn btn-sm btn-danger" href="<?= URL ?>/Usuarios/sair" data-tooltip="tooltip" title="Sair do sistema">Sair</a>
                     </span>

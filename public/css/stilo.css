@@ -5,5 +5,11 @@ body{
 }
 
 .div-principal{
-    background-color: black;
+    margin-top: 15px;
+}
+
+#rodape{
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
 }
