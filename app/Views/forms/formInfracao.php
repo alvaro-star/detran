@@ -33,9 +33,9 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="form-group">
                     <div class="">
-                        <input type="submit" value="Enviar" class="btn btn-info btn-block">
+                        <button class="btn btn-info mt-3">Enviar</button>
                     </div>
                 </div>
 

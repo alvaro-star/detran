@@ -48,7 +48,7 @@
 
                 <div class="row">
                     <div class="">
-                        <input type="submit" value="Enviar" class="btn btn-info btn-block">
+                        <button class = "btn btn-info btn-block mt-3">Enviar</button>
                     </div>
                 </div>
 

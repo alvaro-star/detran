@@ -34,5 +34,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="<?= URL ?>/infracoes/insert">Inserir Infracao</a>
+    <a class="btn btn-info btn-block" href="<?= URL ?>/infracoes/insert">Inserir Infracao</a>
 </div>

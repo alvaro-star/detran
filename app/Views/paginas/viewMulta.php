@@ -36,5 +36,5 @@
             <?php endforeach ?>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="<?= URL ?>/multas/insert">Inserir Multa</a>
+    <a class="btn btn-info btn-block" href="<?= URL ?>/multas/insert">Inserir Multa</a>
 </div>

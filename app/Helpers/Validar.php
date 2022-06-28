@@ -45,10 +45,10 @@ class Validar
     }
 
     //
-    public static function areDiferents($array1, $array2)
+    public static function areDiferents($obj, $array)
     {
-        foreach ($array1 as $campo => $value) {
-            if ($array2[$campo] != $value) {
+        foreach ($obj as $campo => $value) {
+            if ($array[$campo] != $value) {
                 return true;
             }
         }

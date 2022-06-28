@@ -40,5 +40,5 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="<?= URL ?>/carros/insert">Inserir carro</a>
+    <a class="btn btn-info btn-block" href="<?= URL ?>/carros/insert">Inserir carro</a>
 </div>
