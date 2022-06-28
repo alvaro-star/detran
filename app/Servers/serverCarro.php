@@ -86,28 +86,41 @@ class serverCarro extends Controller
     }
 
     public function search($placa){
-        $this->db->query("SELECT tb_carro.idtb_carro, tb_usuario.nome as nome_usuario, tb_carro.nome as nome_carro, tb_carro.placa, tb_carro.postado_em FROM tb_carro, tb_usuario WHERE tb_carro.usuario_id = tb_usuario.idtb_usuario and placa LIKE '%$placa%';");
+        $this->db->query("SELECT tb_carro.idtb_carro, 
+                                tb_usuario.nome as nome_usuario, 
+                                tb_carro.nome as nome_carro, 
+                                tb_carro.placa, 
+                                SUM(tb_infracao.valor) as divida, 
+                                tb_carro.postado_em FROM tb_multa 
+                                INNER JOIN tb_carro ON tb_carro.idtb_carro = tb_multa.tb_carro_idtb_carro 
+                                INNER JOIN tb_infracao ON tb_infracao.idtb_infracao = tb_multa.tb_infracao_idtb_infracao 
+                                INNER JOIN tb_usuario ON tb_usuario.idtb_usuario = tb_carro.usuario_id 
+                                WHERE tb_carro.placa LIKE '%$placa%' 
+                                GROUP BY tb_carro.idtb_carro;");
+
         return $this->db->resultados();
-    }
-
-    public function calcularTotalMultas($carros, $multas, $infracaoServer){
-        foreach ($carros as $carroDB) {
-            $carroDB->valor_multas = 0;
-            foreach ($multas as $multaDB) {
-                if ($multaDB->idtb_carro == $carroDB->idtb_carro) {
-                    $infracao = $infracaoServer->getInfracao($multaDB->idtb_infracao);
-                    $carroDB->valor_multas = $carroDB->valor_multas + $infracao->valor;
-                }
-            }
-        }
-
-        return $carros;
     }
 
     public function getAllCarros()
     {
-        $this->db->query("SELECT tb_carro.idtb_carro, tb_usuario.nome as nome_usuario, tb_carro.nome as nome_carro, tb_carro.placa, tb_carro.postado_em FROM tb_carro, tb_usuario WHERE tb_carro.usuario_id = tb_usuario.idtb_usuario");
-        return $this->db->resultados();
+        $this->db->query("SELECT tb_carro.idtb_carro, 
+                                tb_usuario.nome as nome_usuario, 
+                                tb_carro.nome as nome_carro, 
+                                tb_carro.placa, 
+                                SUM(tb_infracao.valor) as divida, 
+                                tb_carro.postado_em FROM tb_multa 
+                                RIGHT JOIN tb_carro ON tb_carro.idtb_carro = tb_multa.tb_carro_idtb_carro 
+                                LEFT JOIN tb_infracao ON tb_infracao.idtb_infracao = tb_multa.tb_infracao_idtb_infracao 
+                                LEFT JOIN tb_usuario ON tb_usuario.idtb_usuario = tb_carro.usuario_id 
+                                GROUP BY tb_carro.idtb_carro;");
+        $carros = $this->db->resultados();
+
+        foreach ($carros as $carro) {
+            if(is_null($carro->divida)){
+                $carro->divida = 0;
+            }
+        }
+        return $carros;
     }
 
     public function getAllMultas($id)

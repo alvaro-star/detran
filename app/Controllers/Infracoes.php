@@ -29,7 +29,7 @@ class Infracoes extends Controller
         $this->view('forms/formInfracao', $dados);
     }
 
-    public function editInfracao($id){
+    public function edit($id){
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $infracao = $this->infracaoServer->getInfracao($id);
         $infracao = To::array($infracao);
@@ -51,7 +51,7 @@ class Infracoes extends Controller
     }
 
     
-    public function removeInfracao($id)
+    public function remove($id)
     {
         $multasInfracoes = $this->infracaoServer->getAllMultas($id);
         if (!$multasInfracoes) :

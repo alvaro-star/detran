@@ -3,28 +3,24 @@ class Carros extends Controller
 {
 
     private $carroServer;
-    private $multaServer;
-    private $infracaoServer;
 
     public function __construct()
     {
-        if (!Sessao::estaLogado()) :
-            Url::redirecionar('usuarios/login');
-        endif;
-
         $this->db = new Database();
         $this->carroServer = $this->server('Carro');
         $this->multaServer = $this->server('Multa');
         $this->infracaoServer = $this->server('Infracao');
+
+        if (!Sessao::estaLogado()) :
+            Url::redirecionar('usuarios/login');
+        endif;
     }
 
     public function index()
     {
-
-        $multas = $this->multaServer->getAllMultas();
         $carros = $this->carroServer->getAllCarros();
-        $carros = $this->carroServer->calcularTotalMultas($carros, $multas, $this->infracaoServer);
         $this->view('paginas/viewCarro', $carros);
+
     }
 
     public function insert()
@@ -62,7 +58,7 @@ class Carros extends Controller
             $this->view('forms/formCarro', $dados);
         } else {
             Sessao::mensagem('edit', 'Vc nao criou este carro, portanto nao pode editalo', 'alert alert-danger');
-            Url::redirecionar('carros/index');
+            Url::redirecionar('carros/');
         }
     }
 
@@ -88,8 +84,6 @@ class Carros extends Controller
     {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $carros = $this->carroServer->search($formulario['placa']);
-        $multas = $this->multaServer->getAllMultas();
-        $carros = $this->carroServer->calcularTotalMultas($carros, $multas, $this->infracaoServer);
         $this->view('paginas/viewCarro', $carros);
     }
 }

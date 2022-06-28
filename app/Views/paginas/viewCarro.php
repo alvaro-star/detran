@@ -29,7 +29,7 @@
                     <td><?= $carro->nome_usuario ?></td>
                     <td><?= $carro->nome_carro ?></td>
                     <td><?= $carro->placa ?></td>
-                    <td><?= $carro->valor_multas ?></td>
+                    <td><?= $carro->divida ?></td>
                     <td><?= $carro->postado_em ?></td>
                     <td>
                         <a class="btn btn-warning" href="<?= URL ?>/carros/edit/<?= $carro->idtb_carro ?>">Editar</a>

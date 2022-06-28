@@ -1,17 +1,3 @@
-<style>
-    #login{
-        display: flex;
-        position: absolute;
-        right: 0;
-    }
-    #login a, p{
-        margin-right: 10px;
-        height: 100%;
-    }
-    #topo{
-        padding: 15px;
-    }
-</style>
 <header class="bg-dark" id="topo">
     <div class="container">
         <nav class="navbar navbar-expand-sm navbar-dark">
@@ -49,7 +35,7 @@
                         <a class="btn btn-sm btn-danger" href="<?= URL ?>/Usuarios/sair" data-tooltip="tooltip" title="Sair do sistema">Sair</a>
                     </span>
                 <?php else: ?>
-                <span class="navbar-text">
+                <span class="navbar-text" id = "cadastrar">
                     <a class="btn btn-info" href="<?= URL ?>/Usuarios/cadastrar" data-tooltip="tooltip" title="Não tem uma conta? Cadastre-se">Cadastre-se</a>
                     <a class="btn btn-info" href="<?= URL ?>/Usuarios/login" data-tooltip="tooltip" title="Tem uma conta? Faça login">Entrar</a>
                 </span>
@@ -59,3 +45,23 @@
         </nav>
     </div>
 </header>
+
+<style>
+    #login, #cadastrar{
+        display: flex;
+        position: absolute;
+        right: 0;
+    }
+    #login a, p{
+        margin-right: 10px;
+        height: 100%;
+    }
+
+    #cadastrar a{
+        margin-right: 10px;
+        height: 100%;
+    }
+    #topo{
+        padding: 15px;
+    }
+</style>
