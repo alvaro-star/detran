@@ -58,7 +58,7 @@ class Carros extends Controller
             $this->view('forms/formCarro', $dados);
         } else {
             Sessao::mensagem('edit', 'Vc nao criou este carro, portanto nao pode editalo', 'alert alert-danger');
-            Url::redirecionar('carros/');
+            Url::redirecionar('carros');
         }
     }
 
