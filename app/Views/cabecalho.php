@@ -25,9 +25,6 @@
                         <a class="nav-link" href="<?=URL?>/multas/" data-tooltip="tooltip" title="Multa">Multa</a>
                     </li>
                     
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=URL?>/paginas/tabelas" data-tooltip="tooltip" title="Sobre nós">Tabelas</a>
-                    </li>
                 </ul>
                 <?php if(isset($_SESSION['usuario_id'])):?>
                     <span class="navbar-text" id="login">

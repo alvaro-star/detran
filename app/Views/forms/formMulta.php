@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="idtb_carro"><sup class="text-danger">*</sup> Valor <sup class="text-danger">*</sup></label>
+                    <label for="idtb_carro"><sup class="text-danger">*</sup> Carro <sup class="text-danger">*</sup></label>
                     <select name="idtb_carro" id="idtb_carro" class="form-control  <?= $dados['erro']['idtb_carro'] ? 'is-invalid' : '' ?>">
                         <option value=''> Escolha um carro...</option>
                         <?php foreach ($dados['carros'] as $carro) : ?>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="idtb_infracao"><sup class="text-danger">*</sup> Ano <sup class="text-danger">*</sup></label>
+                    <label for="idtb_infracao"><sup class="text-danger">*</sup> Infracao <sup class="text-danger">*</sup></label>
                     <select name="idtb_infracao" id="idtb_infracao" class="form-control <?= $dados['erro']['idtb_infracao'] ? 'is-invalid' : '' ?>">
                         <option value=''> Escolha uma infracao...</option>
                         <?php foreach ($dados['infracoes'] as $infracao) : ?>

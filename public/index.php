@@ -21,7 +21,6 @@
         include(APP.'\Views\cabecalho.php');
         $rotas = new Rota();
         include(APP.'\Views\rodape.php');
-
     ?>
 
     <?php include(PUBLICO.'\js\bootstrapJS.php'); ?>
