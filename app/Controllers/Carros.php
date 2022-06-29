@@ -3,7 +3,7 @@ class Carros extends Controller
 {
 
     private $carroServer;
-    
+
     public function __construct()
     {
         $this->db = new Database();
@@ -20,7 +20,6 @@ class Carros extends Controller
     {
         $carros = $this->carroServer->getAllCarros();
         $this->view('carros/index', $carros);
-
     }
 
     public function insert()
@@ -84,6 +83,6 @@ class Carros extends Controller
     {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $carros = $this->carroServer->search($formulario['placa']);
-        $this->view('paginas/viewCarro', $carros);
+        $this->view('carros/index', $carros);
     }
 }

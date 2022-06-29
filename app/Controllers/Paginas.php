@@ -1,6 +1,5 @@
 <?php
     class Paginas extends Controller{
-
         public function index(){
             if(Sessao::estaLogado()){
                 Url::redirecionar('carros/');
@@ -13,9 +12,5 @@
         public function tabelas(){
             $this->view('paginas/viewTabelas');
         }
-
     }
-    
-
-
 ?>

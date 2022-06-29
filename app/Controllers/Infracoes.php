@@ -12,7 +12,7 @@ class Infracoes extends Controller
     public function index()
     {
         $dados = $this->infracaoServer->getAllInfracoes();
-        $this->view('paginas/viewInfracao', $dados);
+        $this->view('infracoes/index', $dados);
     }
 
     public function insert()
@@ -26,19 +26,20 @@ class Infracoes extends Controller
             Url::redirecionar('infracoes/index');
         endif;
 
-        $this->view('forms/formInfracao', $dados);
+        $this->view('infracoes/form', $dados);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $infracao = $this->infracaoServer->getInfracao($id);
         $infracao = To::array($infracao);
 
-        if(is_null($formulario)){
+        if (is_null($formulario)) {
             $dados = $this->infracaoServer->validarCampos($infracao);
-        }else{
+        } else {
             $dados = $this->infracaoServer->validarCampos($formulario);
-            
+
             if (!in_array(!'', $dados['erro']) && in_array(!'', $dados['dado'])) :
                 Validar::validarIgualdade('edit', $formulario, $infracao);
                 $this->infracaoServer->editInfracaoBD($formulario, $infracao['idtb_infracao']);
@@ -47,10 +48,10 @@ class Infracoes extends Controller
         }
 
         $dados['dado']['idtb_infracao'] = $infracao['idtb_infracao'];
-        $this->view('forms/formInfracao', $dados);
+        $this->view('infracoes/form', $dados);
     }
 
-    
+
     public function remove($id)
     {
         $multasInfracoes = $this->infracaoServer->getAllMultas($id);
@@ -58,15 +59,16 @@ class Infracoes extends Controller
             $this->infracaoServer->removeInfracao($id);
             Sessao::mensagem('delete', 'A infracao foi removido com sucesso');
             Url::redirecionar('infracoes/index');
-        else:
+        else :
             Sessao::mensagem('delete', 'A infracao possui uma multa, nao pode ser removido', 'alert alert-danger');
             Url::redirecionar("multas/search/0/$id");
         endif;
     }
-    
-    public function search(){
+
+    public function search()
+    {
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $dados = $this->infracaoServer->search($formulario['descricao']);
-        $this->view('paginas/viewInfracao', $dados);
+        $this->view('infracoes/index', $dados);
     }
 }

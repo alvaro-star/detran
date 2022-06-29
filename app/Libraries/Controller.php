@@ -7,7 +7,7 @@
 
         public function server($server){
             $server = 'server'.$server;
-            require_once '../app/Servers/'.$server.'.php';
+            require_once "../app/Servers/$server.php";
             return new $server;
         }
 

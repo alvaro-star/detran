@@ -16,7 +16,7 @@ class Multas extends Controller
     public function index()
     {
         $dados = $this->multaServer->getAllMultas();
-        $this->view('paginas/viewMulta', $dados);
+        $this->view('multas/index', $dados);
     }
 
     public function insert()
@@ -32,7 +32,7 @@ class Multas extends Controller
             Url::redirecionar('multas/index');
         endif;
 
-        $this->view('forms/formMulta', $dados);
+        $this->view('multas/form', $dados);
     }
 
     public function edit($id)
@@ -59,7 +59,7 @@ class Multas extends Controller
         $dados['infracoes'] = $this->infracaoServer->getAllInfracoes();
 
         $dados['dado']['idtb_multa'] = $multa['idtb_multa'];
-        $this->view('forms/formMulta', $dados);
+        $this->view('multas/form', $dados);
     }
 
     public function remove($id)
@@ -80,6 +80,6 @@ class Multas extends Controller
             $dados = $this->infracaoServer->getAllMultas($id_infracao);
         }
 
-        $this->view('paginas/viewMulta', $dados);
+        $this->view('multas/index', $dados);
     }
 }
