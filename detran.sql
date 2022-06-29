@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Jun-2022 às 20:24
+-- Tempo de geração: 29-Jun-2022 às 15:08
 -- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.2
+-- versão do PHP: 8.0.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,6 +35,14 @@ CREATE TABLE `tb_carro` (
   `postado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `tb_carro`
+--
+
+INSERT INTO `tb_carro` (`idtb_carro`, `usuario_id`, `nome`, `placa`, `postado_em`) VALUES
+(11, 13, 'Ferr', 'BBB1234', '2022-06-29 11:56:39'),
+(13, 13, 'AAA', 'safdjfdbk', '2022-06-29 12:16:53');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +55,14 @@ CREATE TABLE `tb_infracao` (
   `pontos` int(11) NOT NULL,
   `valor` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tb_infracao`
+--
+
+INSERT INTO `tb_infracao` (`idtb_infracao`, `descricao`, `pontos`, `valor`) VALUES
+(6, 'Matar dois Policiais', 500, 30.66),
+(7, 'Correr Muito Rapido', 600, 700);
 
 -- --------------------------------------------------------
 
@@ -61,6 +77,13 @@ CREATE TABLE `tb_multa` (
   `tb_carro_idtb_carro` int(10) UNSIGNED NOT NULL,
   `tb_infracao_idtb_infracao` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tb_multa`
+--
+
+INSERT INTO `tb_multa` (`idtb_multa`, `ano`, `cidade`, `tb_carro_idtb_carro`, `tb_infracao_idtb_infracao`) VALUES
+(4, 2017, 'Corumba', 11, 6);
 
 -- --------------------------------------------------------
 
@@ -81,7 +104,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`idtb_usuario`, `nome`, `email`, `senha`, `criado_em`) VALUES
-(1, 'alvaro', 'vargas@gmail.com', '12344', '2022-06-28 18:19:00');
+(13, 'Alvaro Vargas', 'alvaro@gmail.com', 'fa916f02ddb45f4ab01d3c48eabe8799', '2022-06-29 11:56:10');
 
 --
 -- Índices para tabelas despejadas
@@ -123,25 +146,25 @@ ALTER TABLE `tb_usuario`
 -- AUTO_INCREMENT de tabela `tb_carro`
 --
 ALTER TABLE `tb_carro`
-  MODIFY `idtb_carro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idtb_carro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `tb_infracao`
 --
 ALTER TABLE `tb_infracao`
-  MODIFY `idtb_infracao` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idtb_infracao` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `tb_multa`
 --
 ALTER TABLE `tb_multa`
-  MODIFY `idtb_multa` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idtb_multa` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
-  MODIFY `idtb_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idtb_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
