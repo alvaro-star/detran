@@ -19,7 +19,7 @@ class Carros extends Controller
     public function index()
     {
         $carros = $this->carroServer->getAllCarros();
-        $this->view('paginas/viewCarro', $carros);
+        $this->view('carros/index', $carros);
 
     }
 
@@ -32,7 +32,7 @@ class Carros extends Controller
             $this->carroServer->insertCarroBD($formulario);
             Url::redirecionar('carros');
         endif;
-        $this->view('forms/formCarro', $dados);
+        $this->view('carros/form', $dados);
     }
 
     public function edit($id)
@@ -55,7 +55,7 @@ class Carros extends Controller
             }
 
             $dados['dado']['idtb_carro'] = $carro['idtb_carro'];
-            $this->view('forms/formCarro', $dados);
+            $this->view('carros/form', $dados);
         } else {
             Sessao::mensagem('edit', 'Vc nao criou este carro, portanto nao pode editalo', 'alert alert-danger');
             Url::redirecionar('carros');

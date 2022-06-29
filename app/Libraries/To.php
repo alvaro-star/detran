@@ -6,16 +6,5 @@
             }
             return $dados;
         }
-        /*
-        public static function obj($array){
-            foreach ($array as $key => $value) {
-                $dados->$key = $value;
-            }
-
-            //call_user_func_array([$this->controlador, $this->metodo], $this->parametros);
-
-            //call
-            return $dados;
-        }*/
     }
 ?>
