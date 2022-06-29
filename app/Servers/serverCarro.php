@@ -85,8 +85,7 @@ class serverCarro extends Controller
         $this->carroModel->removeBD();
     }
 
-    public function search($placa)
-    {
+    public function search($placa){
         $this->db->query("SELECT tb_carro.idtb_carro, 
                                 tb_usuario.nome as nome_usuario, 
                                 tb_carro.nome as nome_carro, 
@@ -102,7 +101,7 @@ class serverCarro extends Controller
         $carros = $this->db->resultados();
 
         foreach ($carros as $carro) {
-            if (is_null($carro->divida)) {
+            if(is_null($carro->divida)){
                 $carro->divida = 0;
             }
         }
@@ -124,7 +123,7 @@ class serverCarro extends Controller
         $carros = $this->db->resultados();
 
         foreach ($carros as $carro) {
-            if (is_null($carro->divida)) {
+            if(is_null($carro->divida)){
                 $carro->divida = 0;
             }
         }
@@ -152,14 +151,12 @@ class serverCarro extends Controller
         return ($this->db->resultado()) ? true : false;
     }
 
-    public function isYourCar($id)
-    {
+    public function isYourCar($id){
         $carro = $this->getCarro($id);
         return ($carro->usuario_id == $_SESSION['usuario_id']) ? true : false;
     }
 
-    public function getModel()
-    {
+    public function getModel(){
         return $this->carroModel;
     }
 }
