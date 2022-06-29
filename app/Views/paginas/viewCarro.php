@@ -1,8 +1,8 @@
-<div class="col-xl-9 col-md-6 mx-auto p-5 text-center">
+<div class="container py-5 text-center">
     <?= Sessao::mensagem('delete') ?>
     <?= Sessao::mensagem('edit') ?>
     <div class="card">
-        <div class="card-header bg-secondary text-white">
+        <div class="card-header bg-info text-white">
             Carros
         </div>
         <div class="card-body">
@@ -18,6 +18,7 @@
                         <th scope="col">Carro</th>
                         <th scope="col">Placa</th>
                         <th scope="col">Divida</th>
+                        <th scope="col">Pontos</th>
                         <th scope="col">Criado em:</th>
                         <th scope="col">Acao</th>
                     </tr>
@@ -30,10 +31,11 @@
                             <td><?= $carro->nome_usuario ?></td>
                             <td><?= $carro->nome_carro ?></td>
                             <td><?= $carro->placa ?></td>
-                            <td><?= $carro->divida ?></td>
+                            <td><?= $carro->divida." R$" ?></td>
+                            <td><?= $carro->pontos ?></td>
                             <td><?= $carro->postado_em ?></td>
                             <td>
-                                <a class="btn btn-warning" href="<?= URL ?>/carros/edit/<?= $carro->idtb_carro ?>">Editar</a>
+                                <a class="btn btn-warning text-white" href="<?= URL ?>/carros/edit/<?= $carro->idtb_carro ?>">Editar</a>
                                 <a class="btn btn-danger" href="<?= URL ?>/carros/remove/<?= $carro->idtb_carro ?>">Remover</a>
                             </td>
                         </tr>
@@ -41,7 +43,7 @@
                 </tbody>
             </table>
 
-            <a class="btn btn-info btn-block" href="<?= URL ?>/carros/insert">Inserir carro</a>
+            <a class="btn btn-info text-white btn-block" href="<?= URL ?>/carros/insert">Inserir carro</a>
         </div>
     </div>
 </div>

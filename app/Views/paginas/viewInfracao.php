@@ -1,8 +1,8 @@
-<div class="col-xl-9 col-md-6 mx-auto p-5 text-center">
+<div class="container py-5 text-center">
     <?= Sessao::mensagem('delete') ?>
     <?= Sessao::mensagem('edit') ?>
     <div class="card">
-        <div class="card-header bg-secondary text-white">
+        <div class="card-header bg-info text-white">
             Infracoes
         </div>
         <div class="card-body">
@@ -27,9 +27,9 @@
                             <th scope="row"><?= $infracao->idtb_infracao ?></th>
                             <td><?= $infracao->descricao ?></td>
                             <td><?= $infracao->pontos ?></td>
-                            <td><?= $infracao->valor ?></td>
+                            <td><?= $infracao->valor." R$" ?></td>
                             <td>
-                                <a class="btn btn-warning" href="<?= URL ?>/infracoes/edit/<?= $infracao->idtb_infracao ?>">Editar</a>
+                                <a class="btn btn-warning text-white" href="<?= URL ?>/infracoes/edit/<?= $infracao->idtb_infracao ?>">Editar</a>
                                 <a class="btn btn-danger" href="<?= URL ?>/infracoes/remove/<?= $infracao->idtb_infracao ?>">Remover</a>
                             </td>
                         </tr>
@@ -37,7 +37,7 @@
                 </tbody>
             </table>
 
-            <a class="btn btn-info btn-block" href="<?= URL ?>/infracoes/insert">Inserir Infracao</a>
+            <a class="btn btn-info btn-block text-white" href="<?= URL ?>/infracoes/insert">Inserir Infracao</a>
         </div>
     </div>
 </div>

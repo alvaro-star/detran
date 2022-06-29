@@ -1,8 +1,9 @@
-<div class="col-xl-9 col-md-6 mx-auto p-5 text-center">
+<div class="container py-5 text-center">
+    <!----col-xl-9 col-md-6 mx-auto p-5 text-center--->
     <?= Sessao::mensagem('delete') ?>
     <?= Sessao::mensagem('edit') ?>
     <div class="card">
-        <div class="card-header bg-secondary text-white">
+        <div class="card-header bg-info text-white">
             Multas
         </div>
         <div class="card-body">
@@ -31,14 +32,14 @@
                             <td><?= $multa->placa ?></td>
                             <td><?= $multa->descricao ?></td>
                             <td>
-                                <a class="btn btn-warning" href="<?= URL ?>/multas/edit/<?= $multa->idtb_multa ?>">Editar</a>
+                                <a class="btn btn-warning text-white" href="<?= URL ?>/multas/edit/<?= $multa->idtb_multa ?>">Editar</a>
                                 <a class="btn btn-danger" href="<?= URL ?>/multas/remove/<?= $multa->idtb_multa ?>">Remover</a>
                             </td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>
             </table>
-            <a class="btn btn-info btn-block" href="<?= URL ?>/multas/insert">Inserir Multa</a>
+            <a class="btn btn-info text-white btn-block" href="<?= URL ?>/multas/insert">Inserir Multa</a>
         </div>
     </div>
 </div>

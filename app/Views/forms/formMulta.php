@@ -48,7 +48,7 @@
 
                 <div class="row">
                     <div class="">
-                        <button class = "btn btn-info btn-block mt-3">Enviar</button>
+                        <button class = "btn btn-info btn-block mt-3 text-white">Enviar</button>
                     </div>
                 </div>
 

@@ -91,6 +91,7 @@ class serverCarro extends Controller
                                 tb_carro.nome as nome_carro, 
                                 tb_carro.placa, 
                                 SUM(tb_infracao.valor) as divida, 
+                                SUM(tb_infracao.pontos) as pontos,
                                 tb_carro.postado_em FROM tb_multa 
                                 RIGHT JOIN tb_carro ON tb_carro.idtb_carro = tb_multa.tb_carro_idtb_carro 
                                 LEFT JOIN tb_infracao ON tb_infracao.idtb_infracao = tb_multa.tb_infracao_idtb_infracao 
@@ -104,6 +105,9 @@ class serverCarro extends Controller
             if(is_null($carro->divida)){
                 $carro->divida = 0;
             }
+            if(is_null($carro->pontos)){
+                $carro->pontos = 0;
+            }
         }
         return $carros;
     }
@@ -115,6 +119,7 @@ class serverCarro extends Controller
                                 tb_carro.nome as nome_carro, 
                                 tb_carro.placa, 
                                 SUM(tb_infracao.valor) as divida, 
+                                SUM(tb_infracao.pontos) as pontos,
                                 tb_carro.postado_em FROM tb_multa 
                                 RIGHT JOIN tb_carro ON tb_carro.idtb_carro = tb_multa.tb_carro_idtb_carro 
                                 LEFT JOIN tb_infracao ON tb_infracao.idtb_infracao = tb_multa.tb_infracao_idtb_infracao 
@@ -125,6 +130,9 @@ class serverCarro extends Controller
         foreach ($carros as $carro) {
             if(is_null($carro->divida)){
                 $carro->divida = 0;
+            }
+            if(is_null($carro->pontos)){
+                $carro->pontos = 0;
             }
         }
         return $carros;
