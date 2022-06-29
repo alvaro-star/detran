@@ -10,7 +10,7 @@
             <form name="login" method="POST" action="<?= URL ?>/usuarios/cadastrar" class="mt-4">
 
                 <div class="form-group">
-                    <label for="nome"><sup class="text-danger">*</sup> E-mail <sup class="text-danger">*</sup></label>
+                    <label for="nome"><sup class="text-danger">*</sup> Nome <sup class="text-danger">*</sup></label>
                     <input type="text" name="nome" id="nome" value="<?= $dados['nome'] ?>" class="form-control <?= $dados['erro']['nome'] ? 'is-invalid' : '' ?>">
                     <div class="invalid-feedback">
                         <?= $dados['erro']['nome'] ?>

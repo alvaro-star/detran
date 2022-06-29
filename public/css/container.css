@@ -4,6 +4,8 @@ body{
     width: 100%;
 }
 
-.botao{
-    margin-top: 16px;
+#home{
+    display: flex;
+    justify-content: center;
+    border: 10px;
 }
