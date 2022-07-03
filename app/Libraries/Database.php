@@ -1,9 +1,9 @@
 <?php
     class Database{
-        private $host = 'localhost';
-        private $user = 'root';
-        private $senha = '';
-        private $base = 'detran';
+        private $host = 'us-cdbr-east-05.cleardb.net';
+        private $user = 'bf1e08804eb278';
+        private $senha = '08292243';
+        private $base = 'heroku_9978d4a9d973550';
         private $porta = '3306';
         private $dbh;
         private $stmt;
