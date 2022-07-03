@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../app/configuracao.php'); //constantes
-include(APP . '\autoload.php');
+include(APP . '/autoload.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,9 +25,9 @@ include(APP . '\autoload.php');
 
     $db = new Database();
     echo "steve";
-    include(APP . '\Views\cabecalho.php');
+    include(APP . '/Views/cabecalho.php');
     $rotas = new Rota();
-    include(APP . '\Views\rodape.php');
+    include(APP . '/Views/rodape.php');
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
