@@ -7,7 +7,7 @@
 
         public function __construct(){
             $url = $this->url();
-            var_dump($url);
+
             if(!is_null($url)):
                 if(file_exists('../app/Controllers/'.ucwords($url[0]).'.php')):
                     $this->controlador = ucwords($url[0]);
@@ -29,8 +29,6 @@
             $this->parametros = $url ? array_values($url) : [];
 
             call_user_func_array([$this->controlador, $this->metodo], $this->parametros);
-
-            //var_dump($this);
         }
         
         private function url(){
@@ -40,7 +38,6 @@
                 $url = explode('/', $url);
                 return $url;
             endif;
-            var_dump($url);
         }
     }
 ?>
