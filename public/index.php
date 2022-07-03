@@ -20,6 +20,7 @@ include(APP . '\autoload.php');
 <body>
     <?php
     echo "steve";
+    echo APP;
     $db = new Database();
     echo "steve";
     include(APP . '\Views\cabecalho.php');
