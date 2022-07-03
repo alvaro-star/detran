@@ -19,8 +19,10 @@ include(APP . '\autoload.php');
 
 <body>
     <?php
-    echo "steve";
-    echo APP;
+    echo "steve<br>";
+    echo APP."<br>";
+    echo PUBLICO;
+
     $db = new Database();
     echo "steve";
     include(APP . '\Views\cabecalho.php');
