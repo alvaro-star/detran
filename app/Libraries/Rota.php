@@ -7,6 +7,7 @@
 
         public function __construct(){
             $url = $this->url();
+            var_dump($url);
             if(!is_null($url)):
                 if(file_exists('../app/Controllers/'.ucwords($url[0]).'.php')):
                     $this->controlador = ucwords($url[0]);
