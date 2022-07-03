@@ -22,9 +22,10 @@ include(APP . '/autoload.php');
     //Nas configuracoes, a barra es invertida, Antes: APP.\autoload... Ahora:APP./autoload...
 
     $db = new Database();
+    echo APP."<br>";
+    echo PUBLICO."<br>";
     include(APP . '/Views/cabecalho.php');
     $rotas = new Rota();
-    var_dump($rotas);
     include(APP . '/Views/rodape.php');
     ?>
 

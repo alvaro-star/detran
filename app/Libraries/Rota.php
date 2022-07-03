@@ -40,7 +40,7 @@
                 $url = explode('/', $url);
                 return $url;
             endif;
-            
+            var_dump($url);
         }
     }
 ?>
