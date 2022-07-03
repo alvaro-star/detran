@@ -21,7 +21,7 @@ include(APP . '\autoload.php');
     <?php
     echo "steve";
     $db = new Database();
-
+    echo "steve";
     include(APP . '\Views\cabecalho.php');
     $rotas = new Rota();
     include(APP . '\Views\rodape.php');
