@@ -12,27 +12,22 @@ include(APP . '/autoload.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/detran.png" />
     <title><?= APP_NAME ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?php include(PUBLICO . '/css/bootstrapCss.php'); ?>
     <link href="../public/css/container.css" rel="stylesheet">
 
 </head>
 
 <body>
     <?php
-    echo "steve<br>";
-    echo APP."<br>";
-    echo PUBLICO;
+    //Nas configuracoes, a barra es invertida, Antes: APP.\autoload... Ahora:APP./autoload...
 
     $db = new Database();
-    echo "steve";
     include(APP . '/Views/cabecalho.php');
     $rotas = new Rota();
     include(APP . '/Views/rodape.php');
     ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <?php include(PUBLICO . '/js/bootstrapJs.php'); ?>
     <script src="<?= URL ?>/public/js/main.js" crossorigin="anonymous"></script>
 
 </body>
