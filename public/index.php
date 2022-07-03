@@ -24,11 +24,12 @@ include(APP . '/autoload.php');
     $db = new Database();
     include(APP . '/Views/cabecalho.php');
     $rotas = new Rota();
+    var_dump($rotas);
     include(APP . '/Views/rodape.php');
     ?>
 
     <?php include(PUBLICO . '/js/bootstrapJs.php'); ?>
-    <script src="<?= URL ?>/public/js/main.js" crossorigin="anonymous"></script>
+    <script src="<?= APP ?>/public/js/main.js" crossorigin="anonymous"></script>
 
 </body>
 
